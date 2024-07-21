@@ -1,0 +1,177 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Projects\\EmployeeManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{40DDDF0D-EF0C-4636-9669-601F8BEC0AEB}|EmployeeManagement.Exceptions.Manager\\EmployeeManagement.Exceptions.Manager.csproj|d:\\projects\\employeemanagement\\employeemanagement.exceptions.manager\\notifyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40DDDF0D-EF0C-4636-9669-601F8BEC0AEB}|EmployeeManagement.Exceptions.Manager\\EmployeeManagement.Exceptions.Manager.csproj|solutionrelative:employeemanagement.exceptions.manager\\notifyexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52873FAE-F3F3-49A1-BF0D-8FC6812FDA46}|EmployeeManagement.Web\\EmployeeManagment.Web.csproj|d:\\projects\\employeemanagement\\employeemanagement.web\\helper\\baseclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52873FAE-F3F3-49A1-BF0D-8FC6812FDA46}|EmployeeManagement.Web\\EmployeeManagment.Web.csproj|solutionrelative:employeemanagement.web\\helper\\baseclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52873FAE-F3F3-49A1-BF0D-8FC6812FDA46}|EmployeeManagement.Web\\EmployeeManagment.Web.csproj|d:\\projects\\employeemanagement\\employeemanagement.web\\helper\\userinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52873FAE-F3F3-49A1-BF0D-8FC6812FDA46}|EmployeeManagement.Web\\EmployeeManagment.Web.csproj|solutionrelative:employeemanagement.web\\helper\\userinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52873FAE-F3F3-49A1-BF0D-8FC6812FDA46}|EmployeeManagement.Web\\EmployeeManagment.Web.csproj|d:\\projects\\employeemanagement\\employeemanagement.web\\helper\\baseproxy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52873FAE-F3F3-49A1-BF0D-8FC6812FDA46}|EmployeeManagement.Web\\EmployeeManagment.Web.csproj|solutionrelative:employeemanagement.web\\helper\\baseproxy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52873FAE-F3F3-49A1-BF0D-8FC6812FDA46}|EmployeeManagement.Web\\EmployeeManagment.Web.csproj|d:\\projects\\employeemanagement\\employeemanagement.web\\helper\\proxyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52873FAE-F3F3-49A1-BF0D-8FC6812FDA46}|EmployeeManagement.Web\\EmployeeManagment.Web.csproj|solutionrelative:employeemanagement.web\\helper\\proxyservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3156A375-54DC-468E-8B20-66EA130B7DDC}|EmployeeManagement.API\\EmployeeManagement.API.csproj|d:\\projects\\employeemanagement\\employeemanagement.api\\employeemanagement.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3156A375-54DC-468E-8B20-66EA130B7DDC}|EmployeeManagement.API\\EmployeeManagement.API.csproj|solutionrelative:employeemanagement.api\\employeemanagement.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A421618-C6BB-486D-BABD-4169F6EA507E}|EmployeeManagement.Core\\EmployeeManagement.Core.csproj|d:\\projects\\employeemanagement\\employeemanagement.core\\common\\servicetokendata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A421618-C6BB-486D-BABD-4169F6EA507E}|EmployeeManagement.Core\\EmployeeManagement.Core.csproj|solutionrelative:employeemanagement.core\\common\\servicetokendata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40DDDF0D-EF0C-4636-9669-601F8BEC0AEB}|EmployeeManagement.Exceptions.Manager\\EmployeeManagement.Exceptions.Manager.csproj|d:\\projects\\employeemanagement\\employeemanagement.exceptions.manager\\ilogging.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40DDDF0D-EF0C-4636-9669-601F8BEC0AEB}|EmployeeManagement.Exceptions.Manager\\EmployeeManagement.Exceptions.Manager.csproj|solutionrelative:employeemanagement.exceptions.manager\\ilogging.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3A421618-C6BB-486D-BABD-4169F6EA507E}|EmployeeManagement.Core\\EmployeeManagement.Core.csproj|d:\\projects\\employeemanagement\\employeemanagement.core\\exceptions\\resourcenotfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3A421618-C6BB-486D-BABD-4169F6EA507E}|EmployeeManagement.Core\\EmployeeManagement.Core.csproj|solutionrelative:employeemanagement.core\\exceptions\\resourcenotfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NotifyException.cs",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Exceptions.Manager\\NotifyException.cs",
+              "RelativeDocumentMoniker": "EmployeeManagement.Exceptions.Manager\\NotifyException.cs",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Exceptions.Manager\\NotifyException.cs",
+              "RelativeToolTip": "EmployeeManagement.Exceptions.Manager\\NotifyException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T07:02:30.726Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmployeeManagement.API.csproj",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.API\\EmployeeManagement.API.csproj",
+              "RelativeDocumentMoniker": "EmployeeManagement.API\\EmployeeManagement.API.csproj",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.API\\EmployeeManagement.API.csproj",
+              "RelativeToolTip": "EmployeeManagement.API\\EmployeeManagement.API.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-07-21T06:45:08.677Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserInfo.cs",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Web\\Helper\\UserInfo.cs",
+              "RelativeDocumentMoniker": "EmployeeManagement.Web\\Helper\\UserInfo.cs",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Web\\Helper\\UserInfo.cs",
+              "RelativeToolTip": "EmployeeManagement.Web\\Helper\\UserInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T06:13:27.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ProxyService.cs",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Web\\Helper\\ProxyService.cs",
+              "RelativeDocumentMoniker": "EmployeeManagement.Web\\Helper\\ProxyService.cs",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Web\\Helper\\ProxyService.cs",
+              "RelativeToolTip": "EmployeeManagement.Web\\Helper\\ProxyService.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAuwCUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T05:48:41.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ResourceNotFoundException.cs",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Core\\Exceptions\\ResourceNotFoundException.cs",
+              "RelativeDocumentMoniker": "EmployeeManagement.Core\\Exceptions\\ResourceNotFoundException.cs",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Core\\Exceptions\\ResourceNotFoundException.cs",
+              "RelativeToolTip": "EmployeeManagement.Core\\Exceptions\\ResourceNotFoundException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T06:01:57.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ServiceTokenData.cs",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Core\\Common\\ServiceTokenData.cs",
+              "RelativeDocumentMoniker": "EmployeeManagement.Core\\Common\\ServiceTokenData.cs",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Core\\Common\\ServiceTokenData.cs",
+              "RelativeToolTip": "EmployeeManagement.Core\\Common\\ServiceTokenData.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAkwB8AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T05:59:01.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BaseProxy.cs",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Web\\Helper\\BaseProxy.cs",
+              "RelativeDocumentMoniker": "EmployeeManagement.Web\\Helper\\BaseProxy.cs",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Web\\Helper\\BaseProxy.cs",
+              "RelativeToolTip": "EmployeeManagement.Web\\Helper\\BaseProxy.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFcAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T05:50:22.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BaseClient.cs",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Web\\Helper\\BaseClient.cs",
+              "RelativeDocumentMoniker": "EmployeeManagement.Web\\Helper\\BaseClient.cs",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Web\\Helper\\BaseClient.cs",
+              "RelativeToolTip": "EmployeeManagement.Web\\Helper\\BaseClient.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAQwCEAAABtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T05:50:09.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ILogging.cs",
+              "DocumentMoniker": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Exceptions.Manager\\ILogging.cs",
+              "RelativeDocumentMoniker": "EmployeeManagement.Exceptions.Manager\\ILogging.cs",
+              "ToolTip": "D:\\Projects\\EmployeeManagement\\EmployeeManagement.Exceptions.Manager\\ILogging.cs",
+              "RelativeToolTip": "EmployeeManagement.Exceptions.Manager\\ILogging.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T06:03:25.679Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
