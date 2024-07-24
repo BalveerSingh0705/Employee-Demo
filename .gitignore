@@ -1,24 +1,25 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-
-
-# Ignore Bin and Obj Folders from All Projects
-
+# Ignore bin and obj directories
 bin/
 obj/
-.vs/
-packages/DLL/
 
-# Ignore other file extensions
-*.ide-shm
-*.ide-wal
-*.suo
+# Ignore user-specific files
 *.user
-*.dbmdl
-*.ide
-*.cache
-*.jfm
+*.swp
 
+# Ignore Visual Studio Code files
+.vscode/
 
+# Ignore Visual Studio files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
+
+# Ignore NuGet packages
+packages/
+
+# Ignore build results
+build/
+
+# Ignore logs
+*.log
