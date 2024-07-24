@@ -1,0 +1,24 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+
+
+# Ignore Bin and Obj Folders from All Projects
+
+bin/
+obj/
+.vs/
+packages/DLL/
+
+# Ignore other file extensions
+*.ide-shm
+*.ide-wal
+*.suo
+*.user
+*.dbmdl
+*.ide
+*.cache
+*.jfm
+
+
