@@ -16,5 +16,6 @@ D:\Projects\EmployeeManagement\EmployeeManagement.Shared\obj\Debug\netstandard2.
 D:\Projects\EmployeeManagement\EmployeeManagement.Shared\obj\Debug\netstandard2.1\EmployeeManagement.Shared.AssemblyInfoInputs.cache
 D:\Projects\EmployeeManagement\EmployeeManagement.Shared\obj\Debug\netstandard2.1\EmployeeManagement.Shared.AssemblyInfo.cs
 D:\Projects\EmployeeManagement\EmployeeManagement.Shared\obj\Debug\netstandard2.1\EmployeeManagement.Shared.csproj.CoreCompileInputs.cache
+D:\Projects\EmployeeManagement\EmployeeManagement.Shared\obj\Debug\netstandard2.1\EmployeeManagement.Shared.sourcelink.json
 D:\Projects\EmployeeManagement\EmployeeManagement.Shared\obj\Debug\netstandard2.1\EmployeeManagement.Shared.dll
 D:\Projects\EmployeeManagement\EmployeeManagement.Shared\obj\Debug\netstandard2.1\EmployeeManagement.Shared.pdb

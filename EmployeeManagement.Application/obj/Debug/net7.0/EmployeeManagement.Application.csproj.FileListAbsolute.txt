@@ -31,6 +31,7 @@ D:\Projects\EmployeeManagement\EmployeeManagement.Application\obj\Debug\net7.0\E
 D:\Projects\EmployeeManagement\EmployeeManagement.Application\obj\Debug\net7.0\EmployeeManagement.Application.AssemblyInfoInputs.cache
 D:\Projects\EmployeeManagement\EmployeeManagement.Application\obj\Debug\net7.0\EmployeeManagement.Application.AssemblyInfo.cs
 D:\Projects\EmployeeManagement\EmployeeManagement.Application\obj\Debug\net7.0\EmployeeManagement.Application.csproj.CoreCompileInputs.cache
+D:\Projects\EmployeeManagement\EmployeeManagement.Application\obj\Debug\net7.0\EmployeeManagement.Application.sourcelink.json
 D:\Projects\EmployeeManagement\EmployeeManagement.Application\obj\Debug\net7.0\Employee.16DA35CB.Up2Date
 D:\Projects\EmployeeManagement\EmployeeManagement.Application\obj\Debug\net7.0\EmployeeManagement.Application.dll
 D:\Projects\EmployeeManagement\EmployeeManagement.Application\obj\Debug\net7.0\refint\EmployeeManagement.Application.dll

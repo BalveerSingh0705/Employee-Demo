@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.API", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Exceptions.Manager", "EmployeeManagement.Exceptions.Manager\EmployeeManagement.Exceptions.Manager.csproj", "{40DDDF0D-EF0C-4636-9669-601F8BEC0AEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Business", "EmployeeManagement.Business\EmployeeManagement.Business.csproj", "{C5039B22-8910-4211-B54C-B5A2ABEB7D93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.DAO", "EmployeeManagement.DAO\EmployeeManagement.DAO.csproj", "{917E2D80-332D-4315-B704-ADB1798DE203}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{40DDDF0D-EF0C-4636-9669-601F8BEC0AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40DDDF0D-EF0C-4636-9669-601F8BEC0AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40DDDF0D-EF0C-4636-9669-601F8BEC0AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5039B22-8910-4211-B54C-B5A2ABEB7D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5039B22-8910-4211-B54C-B5A2ABEB7D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5039B22-8910-4211-B54C-B5A2ABEB7D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5039B22-8910-4211-B54C-B5A2ABEB7D93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{917E2D80-332D-4315-B704-ADB1798DE203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{917E2D80-332D-4315-B704-ADB1798DE203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{917E2D80-332D-4315-B704-ADB1798DE203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{917E2D80-332D-4315-B704-ADB1798DE203}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

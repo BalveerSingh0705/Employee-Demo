@@ -30,6 +30,7 @@ D:\Projects\EmployeeManagement\EmployeeManagement.DataAccess\obj\Debug\net7.0\Em
 D:\Projects\EmployeeManagement\EmployeeManagement.DataAccess\obj\Debug\net7.0\EmployeeManagement.DataAccess.AssemblyInfoInputs.cache
 D:\Projects\EmployeeManagement\EmployeeManagement.DataAccess\obj\Debug\net7.0\EmployeeManagement.DataAccess.AssemblyInfo.cs
 D:\Projects\EmployeeManagement\EmployeeManagement.DataAccess\obj\Debug\net7.0\EmployeeManagement.DataAccess.csproj.CoreCompileInputs.cache
+D:\Projects\EmployeeManagement\EmployeeManagement.DataAccess\obj\Debug\net7.0\EmployeeManagement.DataAccess.sourcelink.json
 D:\Projects\EmployeeManagement\EmployeeManagement.DataAccess\obj\Debug\net7.0\Employee.84AFBD48.Up2Date
 D:\Projects\EmployeeManagement\EmployeeManagement.DataAccess\obj\Debug\net7.0\EmployeeManagement.DataAccess.dll
 D:\Projects\EmployeeManagement\EmployeeManagement.DataAccess\obj\Debug\net7.0\refint\EmployeeManagement.DataAccess.dll

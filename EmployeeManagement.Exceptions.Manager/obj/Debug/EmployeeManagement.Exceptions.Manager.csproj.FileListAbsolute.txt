@@ -1,8 +1,8 @@
-D:\Projects\EmployeeManagement\EmployeeManagement.Exceptions.Manager\obj\Debug\EmployeeManagement.Exceptions.Manager.csproj.AssemblyReference.cache
-D:\Projects\EmployeeManagement\EmployeeManagement.Exceptions.Manager\obj\Debug\EmployeeManagement.Exceptions.Manager.csproj.CoreCompileInputs.cache
 D:\Projects\DLL\AIMS.Exceptions.Manager.dll.config
 D:\Projects\DLL\AIMS.Exceptions.Manager.dll
 D:\Projects\DLL\AIMS.Exceptions.Manager.pdb
+D:\Projects\EmployeeManagement\EmployeeManagement.Exceptions.Manager\obj\Debug\EmployeeManagement.Exceptions.Manager.csproj.AssemblyReference.cache
+D:\Projects\EmployeeManagement\EmployeeManagement.Exceptions.Manager\obj\Debug\EmployeeManagement.Exceptions.Manager.csproj.CoreCompileInputs.cache
 D:\Projects\EmployeeManagement\EmployeeManagement.Exceptions.Manager\obj\Debug\Employee.36194098.Up2Date
 D:\Projects\EmployeeManagement\EmployeeManagement.Exceptions.Manager\obj\Debug\AIMS.Exceptions.Manager.dll
 D:\Projects\EmployeeManagement\EmployeeManagement.Exceptions.Manager\obj\Debug\AIMS.Exceptions.Manager.pdb
