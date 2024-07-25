@@ -1,27 +1,18 @@
-# Ignore bin and obj directories
+
+
+# Ignore Bin and Obj Folders from All Projects
+
 bin/
 obj/
-
-# Ignore user-specific files
-*.user
-*.swp
-
-# Ignore Visual Studio Code files
-.vscode/
 .vs/
-
-# Ignore Visual Studio files
-*.suo
-*.ntvs*
-*.njsproj
-*.sln.docstates
-*.dll
-
-# Ignore NuGet packages
 packages/
 
-# Ignore build results
-build/
-
-# Ignore logs
-*.log
+# Ignore other file extensions
+*.ide-shm
+*.ide-wal
+*.suo
+*.user
+*.dbmdl
+*.ide
+*.cache
+*.jfm
