@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using EmployeeManagement.Applictaion.Models.User;
-using EmployeeManagement.DataAccess.Identity;
+//using EmployeeManagement.DataAccess.Identity;
 
 namespace EmployeeManagement.Applictaion.Models.Validators.User;
 

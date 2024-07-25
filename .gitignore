@@ -8,12 +8,14 @@ obj/
 
 # Ignore Visual Studio Code files
 .vscode/
+.vs/
 
 # Ignore Visual Studio files
 *.suo
 *.ntvs*
 *.njsproj
 *.sln.docstates
+*.dll
 
 # Ignore NuGet packages
 packages/

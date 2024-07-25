@@ -1,73 +1,143 @@
 ﻿
 using EmployeeManagement.Core.Common;
-
+using EmployeeManagement.DAO;
+using Microsoft.Data.SqlClient;
 using System.Data;
+
+
 
 namespace EmployeeManagement.DAO
 {
     public class EmployeeConfigurationDAO : IConfiguration
     {
 
+        private readonly string _connectionString;
+        string connectionString = ConstantsModels.loginQuery;
+
+
         /// <summary>
         /// SaveOrUpdateTemplateFieldData
         /// </summary>
         /// <param name="employeeEntity"></param>
         /// <returns></returns>
-        public bool SaveOrUpdateEmployeeDetails(EmployeeEntity employeeEntity)
+        /// 
+        public bool SaveOrUpdateEmployeeDetails(EmployeeEntity employee)
         {
             bool isSuccess = false;
 
-            //try
-            //{
-            //    using (SqlConnection conn = new SqlConnection(TenantCache.GetSqlDbConnectionFromCacheByTenantId(employeeEntity.TenantId)))
-            //    {
-            //        using (SqlCommand cmd = new SqlCommand("usp_SaveOrUpdateemployeeEntity", conn))
-            //        {
-            //            cmd.CommandTimeout = 60;
-            //            cmd.CommandType = CommandType.StoredProcedure;
-            //            cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier).Value = employeeEntity.empID;
-            //            //cmd.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier).Value = employeeEntity.UserId;
-            //            //cmd.Parameters.Add("@TemplateId", SqlDbType.UniqueIdentifier).Value = employeeEntity.TemplateId;
-            //            //cmd.Parameters.Add("@FieldType", SqlDbType.UniqueIdentifier).Value = employeeEntity.FieldType;
-            //            //cmd.Parameters.Add("@Order", SqlDbType.Int).Value = employeeEntity.Order;
-            //            //cmd.Parameters.Add("@FieldName", SqlDbType.NVarChar).Value = employeeEntity.FieldName;
-            //            //cmd.Parameters.Add("@Format", SqlDbType.NVarChar).Value = employeeEntity.Format;
-            //            //cmd.Parameters.Add("@ToolTip", SqlDbType.NVarChar).Value = employeeEntity.ToolTip;
-            //            //cmd.Parameters.Add("@IsRequired", SqlDbType.Bit).Value = employeeEntity.IsRequired;
-            //            //cmd.Parameters.Add("@EntityTypeName", SqlDbType.NVarChar).Value = employeeEntity.EntityTypeName;
-            //            //cmd.Parameters.Add("@Scope", SqlDbType.NVarChar).Value = employeeEntity.Scope;
-            //            //cmd.Parameters.Add("@ScopeId", SqlDbType.UniqueIdentifier).Value = employeeEntity.ScopeId;
-            //            //cmd.Parameters.Add("@IsHidden", SqlDbType.Bit).Value = employeeEntity.IsHidden;
-            //            //cmd.Parameters.Add("@FieldTypeName", SqlDbType.NVarChar).Value = employeeEntity.FieldTypeName;
-            //            //cmd.Parameters.Add("@IdMenu", SqlDbType.UniqueIdentifier).Value = employeeEntity.MenuId;
-            //            //cmd.Parameters.Add("@FieldTemplate", SqlDbType.UniqueIdentifier).Value = employeeEntity.FieldTemplate;
-            //            //cmd.Parameters.Add("@Unit", SqlDbType.UniqueIdentifier).Value = employeeEntity.UnitId;
-            //            //cmd.Parameters.Add("@IconSymbolId", SqlDbType.UniqueIdentifier).Value = employeeEntity.IconSymbolId;
-            //            //cmd.Parameters.Add("@IconDescription", SqlDbType.NVarChar).Value = employeeEntity.IconDescription;
-            //            //cmd.Parameters.Add("@FieldDescription", SqlDbType.NVarChar).Value = employeeEntity.FieldDescription;
+           
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("usp_InsertUserInfo", connection))
+                    {
+                        command.CommandTimeout = 60;
+                        command.CommandType = CommandType.StoredProcedure;
 
-            //            conn.Open();
-            //            SqlDataReader rdr = cmd.ExecuteReader();
-            //            rdr.Close();
-            //            conn.Close();
-            //            isSuccess = true;
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    isSuccess = false;
-            //    using (LogException _error = new LogException(typeof(ConfigurationDAO), TenantCache.GetSqlDbConnectionFromCacheByTenantId(employeeEntity.TenantId)))
-            //    {
-            //        _error.Exception("Exception in SaveOrUpdateTemplateFieldData:", ex, TenantCache.GetSubDomainByTenantId((Guid)employeeEntity.TenantId), employeeEntity.UserName, employeeEntity);
-            //    }
-            //}
+                        command.Parameters.Add("@CreatedBy", SqlDbType.NVarChar).Value = employee.CreatedBy;
+                        command.Parameters.Add("@ModifiedBy", SqlDbType.NVarChar).Value = employee.ModifiedBy;
+                        command.Parameters.Add("@RoleCode", SqlDbType.NVarChar).Value = employee.RoleCode;
+                        command.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier).Value = employee.UserId;
+                        command.Parameters.Add("@CreatedDate", SqlDbType.DateTime2).Value = employee.CreatedDate;
+                        command.Parameters.Add("@ModifiedDate", SqlDbType.DateTime2).Value = employee.ModifiedDate;
+                        command.Parameters.Add("@Location", SqlDbType.NVarChar).Value = employee.Location;
+                        command.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = employee.UserName;
+                        command.Parameters.Add("@EmpID", SqlDbType.NVarChar).Value = employee.empID;
+                        command.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = employee.phone;
+                        command.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = employee.firstName;
+                        command.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = employee.lastName;
+                        command.Parameters.Add("@Designation", SqlDbType.NVarChar).Value = employee.designation;
+                        command.Parameters.Add("@Experience", SqlDbType.Int).Value = employee.experience;
+                        command.Parameters.Add("@DateOfBirth", SqlDbType.DateTime2).Value = employee.dateOfBirth;
+                        command.Parameters.Add("@DateOfJoining", SqlDbType.DateTime2).Value = employee.dateOfJoining;
+                        command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = employee.address;
+                        command.Parameters.Add("@PinCode", SqlDbType.NVarChar).Value = employee.pinCode;
+                        command.Parameters.Add("@City", SqlDbType.NVarChar).Value = employee.city;
+                        command.Parameters.Add("@State", SqlDbType.NVarChar).Value = employee.state;
+                        command.Parameters.Add("@PanNumber", SqlDbType.NVarChar).Value = employee.panNumber;
+                        command.Parameters.Add("@AadhaarCard", SqlDbType.NVarChar).Value = employee.aadhaarCard;
+                        command.Parameters.Add("@ContactSite", SqlDbType.NVarChar).Value = employee.contactSite;
+                        command.Parameters.Add("@BankName", SqlDbType.NVarChar).Value = employee.bankName;
+                        command.Parameters.Add("@BankAddress", SqlDbType.NVarChar).Value = employee.bankAddress;
+                        command.Parameters.Add("@AccountNumber", SqlDbType.NVarChar).Value = employee.accountNumber;
+                        command.Parameters.Add("@IFSC", SqlDbType.NVarChar).Value = employee.iFSC;
+                        command.Parameters.Add("@Salary", SqlDbType.Decimal).Value = employee.salary;
+                        command.Parameters.Add("@PFNumber", SqlDbType.NVarChar).Value = employee.pFNumber;
+                        command.Parameters.Add("@WorkingHours", SqlDbType.NVarChar).Value = employee.workingHours;
+
+                        command.ExecuteNonQuery();
+                        isSuccess = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+
+            }
 
             return isSuccess;
         }
+        public List<TableFormEntity> GetEmployeeDetailsInTableForm(TableFormEntity tableFormEntity)
+        {
+            List<TableFormEntity> lstTemplateData = new List<TableFormEntity>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("usp_GetTableFormEmployeeInfo", connection))
+                    {
+                        command.CommandTimeout = 60;
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Add parameters if needed
+                        // command.Parameters.Add("@ParameterName", SqlDbType.NVarChar).Value = tableFormEntity.SomeProperty;
+
+                        connection.Open();
+                        using (SqlDataReader rdr = command.ExecuteReader())
+                        {
+                            while (rdr.Read())
+                            {
+                                lstTemplateData.Add(new TableFormEntity()
+                                {
+
+                                    empID = Convert.ToString(rdr["EmpID"]),
+                                    firstName = Convert.ToString(rdr["FirstName"]),
+                                    lastName = Convert.ToString(rdr["LastName"]),
+                                    phoneNo = Convert.ToString(rdr["PhoneNo"]),
+                                    salary = Convert.ToString(rdr["Salary"]),
+                                    designation = Convert.ToString(rdr["Designation"])
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception (log it, rethrow it, etc.)
+                throw new Exception("An error occurred while fetching employee details in table form", ex);
+            }
+            return lstTemplateData;
+        }
+
+        // Ensure TableFormEntity class includes all necessary properties
+      
+
 
 
 
     }
 }
+
+
+
+
+
+
+
+
+

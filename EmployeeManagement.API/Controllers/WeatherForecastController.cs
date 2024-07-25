@@ -1,26 +1,33 @@
-﻿using EmployeeManagement.Applictaion.Models;
-using EmployeeManagement.Applictaion.Models.WeatherForecast;
-using EmployeeManagement.Applictaion.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-
-namespace EmployeeManagement.API.Controllers;
-
-[Authorize]
-public class WeatherForecastController : ApiController
+namespace EmployeeManagement.API.Controllers
 {
-    private readonly IWeatherForecastService _weatherForecastService;
-
-    public WeatherForecastController(IWeatherForecastService weatherForecastService)
+    [ApiController]
+    [Route("[controller]")]
+    public class WeatherForecastController : ControllerBase
     {
-        _weatherForecastService = weatherForecastService;
-    }
+        private static readonly string[] Summaries = new[]
+        {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
-    [HttpGet]
-    public async Task<IActionResult> Get()
-    {
-        return Ok(
-            ApiResult<IEnumerable<WeatherForecastResponseModel>>.Success(await _weatherForecastService.GetAsync()));
+        private readonly ILogger<WeatherForecastController> _logger;
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet(Name = "GetWeatherForecast")]
+        public IEnumerable<WeatherForecast> Get()
+        {
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            })
+            .ToArray();
+        }
     }
 }

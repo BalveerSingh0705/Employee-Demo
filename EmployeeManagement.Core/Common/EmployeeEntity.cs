@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.Core.Entities;
+﻿using EmployeeManagement.Common;
+using EmployeeManagement.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Core.Common
 {
-    public class EmployeeEntity : ApiResponseEntity
+    public class EmployeeEntity :  BaseDataObject
     {
 
 
