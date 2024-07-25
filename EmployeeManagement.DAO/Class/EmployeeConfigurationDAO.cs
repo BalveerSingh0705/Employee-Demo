@@ -81,6 +81,13 @@ namespace EmployeeManagement.DAO
 
             return isSuccess;
         }
+
+        /// <summary>
+        /// GetEmployeeDetailsInTableForm
+        /// </summary>
+        /// <param name="tableFormEntity"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<TableFormEntity> GetEmployeeDetailsInTableForm(TableFormEntity tableFormEntity)
         {
             List<TableFormEntity> lstTemplateData = new List<TableFormEntity>();
