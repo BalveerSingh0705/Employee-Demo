@@ -1,0 +1,35 @@
+﻿
+<style>
+    .hide {
+        display: none !important;
+    }
+</style>
+
+
+
+<div class="modal fade" id="viewEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="viewEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewEmployeeModalLabel">Employee Details</h5>
+                <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="alertSuccess" class="alert alert-success hide" role="alert">
+                Changes saved successfully!
+            </div>
+            <div class="modal-body">
+                <p>Employee ID: <span id="empID"></span></p>
+                <p>Employee Name: <span id="empName"></span></p>
+                <p>Employee Position: <span id="empPosition"></span></p>
+                <!-- Add other fields as needed -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary hide" id="cancelBtn">Cancel</button>
+                <button type="button" class="btn btn-primary hide" id="saveChangesBtn">Save Changes</button>
+                <button type="button" class="btn btn-primary " id="editBtn">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
