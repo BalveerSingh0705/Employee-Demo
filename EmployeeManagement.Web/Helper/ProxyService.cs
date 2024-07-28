@@ -13,6 +13,7 @@ using EmployeeManagement.Core.Common;
 using EmployeeManagement.Exceptions.Manager;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using EmployeeManagement.Core.Entities;
 namespace EmployeeManagement.Web.Helper
 {
     /*
@@ -131,7 +132,7 @@ namespace EmployeeManagement.Web.Helper
                 }
             }
             return new ServiceTokenData();
-        } 
+        }
         #endregion
 
         #region Private Methods
@@ -223,14 +224,75 @@ namespace EmployeeManagement.Web.Helper
             return isSuccess;
         }
 
+        public static async Task<List<TableFormEntity>> GetEmployeeDetailsInTableForm()
+        {
+            List<TableFormEntity> tableFormEntities = new List<TableFormEntity>();
 
+            try
+            {
+                // Ensure the URL for the API endpoint is correct.
+                string url = ServiceVirtualDirName + "api/EmployeeConfiguration/GetEmployeeDetailsInTableForm";
 
+                // Use the BaseProxy class to perform the GET operation.
+                var response = await BaseProxy.Instance.GetAsyncMethod(url);
 
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    tableFormEntities = JsonConvert.DeserializeObject<List<TableFormEntity>>(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed.
+                //using (LogException _error = new LogException(typeof(ProxyService), TenantCache.GetSqlDbConnectionFromCacheByTenantId(employeeEntity.TenantId)))
+                //{
+                //    _error.Exception("Error in GetEmployeeDetailsInTableForm", ex, TenantCache.GetSubDomainByTenantId((Guid)employeeEntity.TenantId), UserInfo.GetUserName(), employeeEntity);
+                //}
 
+                // Optionally rethrow the exception or handle it in a way that informs the caller
+                throw;
+            }
 
+            return tableFormEntities;
+        }
 
+        public static async Task<bool> DeleteSingleEmployeeDetails(EmployeeDataInIDEntity employeeDataInIDEntity)
+        {
+            bool isSuccess = false;
+            try
+            {
+                // Ensure the URL for the API endpoint is correct.
+                string url = ServiceVirtualDirName + "api/EmployeeConfiguration/DeleteSingleEmployeeDetails";
 
+                // Use the BaseProxy class to perform the POST operation.
+                var response = await BaseProxy.Instance.PostAsyncMethod(url, employeeDataInIDEntity);
 
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read the response content asynchronously.
+                    string result = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize the result to a boolean.
+                    isSuccess = JsonConvert.DeserializeObject<bool>(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed.
+                //using (LogException _error = new LogException(typeof(ProxyService), TenantCache.GetSqlDbConnectionFromCacheByTenantId(employeeEntity.TenantId)))
+                //{
+                //    _error.Exception("Error in CreateEmployeeAsync", ex, TenantCache.GetSubDomainByTenantId((Guid)employeeEntity.TenantId), UserInfo.GetUserName(), employeeEntity);
+                //}
+
+                // Optionally rethrow the exception or handle it in a way that informs the caller
+                throw;
+            }
+            return isSuccess;
+        }
+    }
+
+}
 
 
 
@@ -238,6 +300,3 @@ namespace EmployeeManagement.Web.Helper
 
         #endregion
 
-
-    }
-}

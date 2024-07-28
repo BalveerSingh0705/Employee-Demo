@@ -2,6 +2,6 @@
 {
     public class EmployeeDataInIDEntity
     {
-        public int EmpID { get; set; }
+        public string EmpID { get; set; }
     }
 }

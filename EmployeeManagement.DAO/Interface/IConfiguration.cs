@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Core.Common;
+using EmployeeManagement.Core.Entities;
 
 namespace EmployeeManagement.DAO
 {
@@ -10,5 +11,10 @@ namespace EmployeeManagement.DAO
         /// <param name="template"></param>
         /// <returns></returns>
         bool SaveOrUpdateEmployeeDetails(EmployeeEntity employeeEntity);
+        List<TableFormEntity> GetEmployeeDetailsInTableForm();
+      
+      //  List<EmployeeEntity> DeleteSingleEmployeeDetails(EmployeeDataInIDEntity employeeDataInIDEntity);
+        List<EmployeeEntity> GetEmployeeDetailsClickOnEditButton(EmployeeDataInIDEntity employeeDataInIDEntity);
+        bool DeleteSingleEmployeeDetails(EmployeeDataInIDEntity employeeDataInIDEntity);
     }
 }

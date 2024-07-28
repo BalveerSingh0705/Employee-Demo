@@ -1,4 +1,81 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿$(document).ready(function () {
+    function GetAllEmployeeDetailsInTableFormat();
+});
+
+function GetAllEmployeeDetailsInTableFormat()
+{
+
+    $.ajax({
+        url: '/AddEmployee/GetEmployeeDetailsInTableForm',
+        method: 'GET',
+        success: function (data) {
+            console.log("Data received:", data); // Debug: log the received data
+
+            var tableBody = $('.search-table tbody');
+            tableBody.empty(); // Clear any existing rows
+
+            if (Array.isArray(data)) {
+                data.forEach(function (employee) {
+                    var name = employee.firstName + " " + employee.lastName;
+                    var row = `<tr class="table-default search-items">
+                                    name=
+                                <td>${employee.empID}</td>
+                                <td>${name}</td>
+                                <td>${employee.phoneNo}</td>
+                                <td>${employee.salary}</td>
+                                <td>${employee.designation}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item EmployeeDTView" onclick="GetEmployeeAllInformationClickViewButton('${employee.empID}')" href=""><i class="far fa-eye"></i> View</a>
+                                            <a class="dropdown-item deleteEmployee" onclick="deleteEmployeeInformation('${employee.empID}')" ><i class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>`;
+                    tableBody.append(row);
+                });
+
+                //  $('#successMessage').show().delay(3000).fadeOut(); // Display success message
+            } else {
+                console.error("Expected data to be an array but got:", data);
+            }
+        },
+        error: function (error) {
+            console.error('Error fetching employee data', error);
+        }
+    });
+
+
+}
+
+
+
+
+
+
+// View Employee Information click on view button.
+function GetEmployeeAllInformationClickViewButton(empId) {
+    alert(empId);
+    $.ajax({
+        url: '/AddEmployee/ViewEmployeeAllDetails', // Replace with your controller endpoint URL
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ EmpID: empId }),
+        success: function (response) {
+            alert('Data received successfully: ' + response.message);
+            OpenModels(response);
+        },
+        error: function (error) {
+            alert('Error: ' + error.responseText);
+        }
+    });
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
     const rowsPerPage = 7;
     let currentPage = 1;
 
@@ -40,6 +117,8 @@
         }
     });
 
+
+    // Search Specific employee
     function handleSearch() {
         const searchValue = document.getElementById("SearchItem").value.trim().toLowerCase();
 
@@ -77,43 +156,9 @@
     displayRows();
     updatePaginationControls();
 });
-$(".search-table").on("click", ".delete", function () {
-    var row = $(this).closest("tr");
-    var  empID = row.querySelector("td:first-child").innerText.toLowerCase(); // Assuming the first column is the EmpID
-    alert(empID);
-    var empID = row.find("td:first-child").text().trim(); // Assuming the second column is the Name
-    alert(empName);
-    console.log("Delete employee with EmpID:", empID, "and Name:", empName);
-    SendDataToController(empID, empName);
-    row.remove(); // Remove the row from the table
-});
 
+//View  and edit single employee when click view button
 
-
-
-$(document).ready(function () {
-    $('.view').click(function (e) {
-        e.preventDefault(); // Prevent the default link behavior
-
-        var empId = $(this).closest('tr').find('td:eq(0)').text();
-        alert(empId);
-
-
-        $.ajax({
-            url: '/AddEmployee/ViewEmployeeAllDetails', // Replace with your controller endpoint URL
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ EmpID: empId }),
-            success: function (response) {
-                alert('Data received successfully: ' + response.message);
-                OpenModels(response);
-            },
-            error: function (error) {
-                alert('Error: ' + error.responseText);
-            }
-        });
-    });
-});
 document.getElementById('closeModal').addEventListener('click', function () {
     // window.location.href = '/AddEmployee/AddEmployeePage';  // Replace with the actual URL you want to redirect to
     $('#viewEmployeeModal').modal('hide');
@@ -207,39 +252,61 @@ function saveChanges(updatedData) {
     });
 }
 
-$(document).ready(function () {
-    $('.deleteEmployee').click(function (e) {
-        e.preventDefault(); // Prevent the default link behavior
 
-        var empId = $(this).closest('tr').find('td:eq(0)').text();
-        alert(empId);
-        $.ajax({
-            url: '/AddEmployee/DeleteEmployeeDetails', // Ensure this matches your controller endpoint URL
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ EmpID: empId }), // Send the employee ID in the request body
-            success: function (response) {
-                if (response.success) {
-                    $('#successMessage').text(response.message).show();
-                    setTimeout(function () {
-                        $('#successMessage').text(response.message).hide();
 
-                    }, 3000); // Hide after 3 seconds
 
-                    // Show success message
-                  
 
-                    // Optionally, remove employee row from the table or refresh the list
-                    // For example, if you have a function to refresh the employee list
-                   // refreshEmployeeList(); // Implement this function to refresh the list
 
-                } else {
-                    alert('Error: ' + response.error);
-                }
-            },
-            error: function (error) {
-                alert('Error: ' + error.responseText);
+//Delete Table data 
+function deleteEmployeeInformation(empId) {
+    $.ajax({
+        url: '/AddEmployee/DeleteSingleEmployeeDetails', // Ensure this matches your controller endpoint URL
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ EmpID: empId }), // Send the employee ID in the request body
+        success: function (response) {
+            if (response == true) {
+
+               
+                showSuccessMessage("Table deleted successfully.");
+
+            } else {
+                alert('Error: ' + response.error);
             }
-        });
+        },
+        error: function (error) {
+          
+            showSuccessMessage('Error: ' + error.responseText);
+        }
     });
-});
+}
+
+
+// Success And Error massage.
+function showSuccessMessage(customMessage) {
+    var messageElement = document.getElementById("messageContent");
+    var successMessageDiv = document.getElementById("successMessage");
+
+    if (!messageElement || !successMessageDiv) {
+        console.error("Message element or success message div not found");
+        return;
+    }
+
+    // Update the message content
+    messageElement.textContent = customMessage;
+
+    // Show the success message div
+    successMessageDiv.style.display = "block";
+
+    console.log("Message displayed: " + customMessage);
+
+    // Hide the success message div after 3 seconds
+    setTimeout(function () {
+        successMessageDiv.style.display = "none";
+        console.log("Message hidden");
+    }, 5000);
+}
+
+// Test the function
+
+

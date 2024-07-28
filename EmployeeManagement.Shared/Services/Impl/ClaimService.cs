@@ -6,7 +6,7 @@ namespace EmployeeManagement.Shared.Services.Impl
     public class ClaimService : IClaimService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-
+      
         public ClaimService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;

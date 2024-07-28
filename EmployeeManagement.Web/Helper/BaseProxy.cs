@@ -55,42 +55,11 @@ namespace EmployeeManagement.Web.Helper
             }
         }
 
-        //public async Task<HttpResponseMessage> PostAsyncMethod(string serviceURL, object objectData)
-        //{
-        //   // SetValue(objectData, "UserName", UserInfo.GetUserName());
-        //    var response = await ServiceClient.PostAsync(serviceURL, CreateHttpContent(objectData));
-        //    try
-        //    {
-        //        if (response.ReasonPhrase.ToLower().Equals("unauthorized") && response.IsSuccessStatusCode == false)
-        //        {
-        //            // Generate Token
-        //            UserCredentialData objUserCredentialModel = new UserCredentialData
-        //            {
-        //                Username = "Anurag123@Gmail.com", //UserInfo.GetUserName(),
-        //                Password = "Anurag123@Gmail.com"//UserInfo.GetUserPassword()
-        //            };
-
-        //            //--Getting token and store it in session.
-        //            ServiceTokenData tokenDetails = await GetAccessTokenAsync(objUserCredentialModel);
-
-        //            //HttpContext.Current.Session["ServiceToken"] = tokenDetails.AccessToken;
-
-        //            //Re-Call WebAPI
-        //            response = await ServiceClient.PostAsync(serviceURL, CreateHttpContent(objectData));
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        using (LogException _error = new LogException(typeof(BaseProxy), connectionString))
-        //        {
-        //            _error.Exception("Error in PostAsyncMethod", ex, "", "Anurag123@Gmail.com"/* UserInfo.GetUserName()*/, new { ServiceURL = serviceURL, ObjectData = objectData });
-        //        }
-        //    }
-        //    return response;
-        //}
-
+       
         public async Task<HttpResponseMessage> GetAsyncMethod(string serviceURL)
         {
+
+           var ServiceClient = new HttpClient();
             var response = await ServiceClient.GetAsync(serviceURL);
             try
             {

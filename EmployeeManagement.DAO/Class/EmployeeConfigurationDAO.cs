@@ -1,8 +1,11 @@
 ﻿
 using EmployeeManagement.Core.Common;
+using EmployeeManagement.Core.Entities;
 using EmployeeManagement.DAO;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Reflection.PortableExecutable;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
 
@@ -25,7 +28,7 @@ namespace EmployeeManagement.DAO
         {
             bool isSuccess = false;
 
-           
+
 
             try
             {
@@ -88,7 +91,7 @@ namespace EmployeeManagement.DAO
         /// <param name="tableFormEntity"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public List<TableFormEntity> GetEmployeeDetailsInTableForm(TableFormEntity tableFormEntity)
+        public List<TableFormEntity> GetEmployeeDetailsInTableForm()
         {
             List<TableFormEntity> lstTemplateData = new List<TableFormEntity>();
             try
@@ -114,7 +117,7 @@ namespace EmployeeManagement.DAO
                                     empID = Convert.ToString(rdr["EmpID"]),
                                     firstName = Convert.ToString(rdr["FirstName"]),
                                     lastName = Convert.ToString(rdr["LastName"]),
-                                    phoneNo = Convert.ToString(rdr["PhoneNo"]),
+                                    phoneNo = Convert.ToString(rdr["Phone"]),
                                     salary = Convert.ToString(rdr["Salary"]),
                                     designation = Convert.ToString(rdr["Designation"])
                                 });
@@ -132,14 +135,130 @@ namespace EmployeeManagement.DAO
         }
 
         // Ensure TableFormEntity class includes all necessary properties
-      
+
+        public List<EmployeeEntity> GetEmployeeDetailsClickOnEditButton(EmployeeDataInIDEntity employeeDataInIDEntity)
+        {
+            List<EmployeeEntity> employeeList = new List<EmployeeEntity>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("usp_GetEmployeeInfoByEmpID", connection))
+                    {
+                        command.CommandTimeout = 60;
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Add the empID parameter to the command
+                        command.Parameters.Add("@EmpID", SqlDbType.NVarChar).Value = employeeDataInIDEntity.EmpID;
+
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                EmployeeEntity employee = new EmployeeEntity
+                                {
+                                    empID = reader["EmpID"].ToString(),
+                                    phone = reader["Phone"].ToString(),
+                                    contactSite = reader["ContactSite"].ToString(),
+                                    CreatedBy = reader["CreatedBy"].ToString(),
+                                    ModifiedBy = reader["ModifiedBy"].ToString(),
+                                    RoleCode = reader["RoleCode"].ToString(),
+                                    UserId = (Guid)reader["UserId"],
+                                    CreatedDate = Convert.ToDateTime(reader["CreatedDate"]),
+                                    ModifiedDate = Convert.ToDateTime(reader["ModifiedDate"]),
+                                    Location = reader["Location"].ToString(),
+                                    UserName = reader["UserName"].ToString(),
+                                    firstName = reader["FirstName"].ToString(),
+                                    lastName = reader["LastName"].ToString(),
+                                    designation = reader["Designation"].ToString(),
+                                    experience = Convert.ToInt32(reader["Experience"]),
+                                    dateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
+                                    dateOfJoining = Convert.ToDateTime(reader["DateOfJoining"]),
+                                    address = reader["Address"].ToString(),
+                                    pinCode = reader["PinCode"].ToString(),
+                                    city = reader["City"].ToString(),
+                                    state = reader["State"].ToString(),
+                                    panNumber = reader["PanNumber"].ToString(),
+                                    aadhaarCard = reader["AadhaarCard"].ToString(),
+                                    bankName = reader["BankName"].ToString(),
+                                    bankAddress = reader["BankAddress"].ToString(),
+                                    accountNumber = reader["AccountNumber"].ToString(),
+                                    iFSC = reader["IFSC"].ToString(),
+                                    salary = Convert.ToDecimal(reader["Salary"]),
+                                    pFNumber = reader["PFNumber"].ToString(),
+                                    workingHours = reader["WorkingHours"].ToString()
+                                };
+
+                                employeeList.Add(employee);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception (log it, rethrow it, etc.)
+                throw new Exception("An error occurred while fetching employee details in table form", ex);
+            }
+
+            return employeeList;
+        }
+
+
+
+        public bool DeleteSingleEmployeeDetails(EmployeeDataInIDEntity employeeDataInIDEntity)
+        {
+            bool isSuccess = false;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                   
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("usp_DeleteSingleEmployeeDetails", connection))
+                    {
+                        command.CommandTimeout = 60;
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@EmpID", SqlDbType.NVarChar).Value = employeeDataInIDEntity.EmpID;
+
+
+                        command.ExecuteNonQuery();
+                        isSuccess = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+
+            }
+
+            return isSuccess;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
     }
 }
-
 
 
 

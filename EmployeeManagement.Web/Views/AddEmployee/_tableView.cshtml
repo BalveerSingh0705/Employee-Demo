@@ -1,12 +1,11 @@
-﻿
-
-<div class="alert alert-success" id="successMessage" style="display: none;">
-    Operation successful!
+﻿<div class="alert alert-success" id="successMessage" style="display: none;">
+    <span id="messageContent">Operation successful!</span>
 </div>
+
     <div class="card">
         <h5 class="card-header">Contextual Classes</h5>
         <div class="table-responsive text-nowrap">
-            <table class="table search-table">
+            <table class="table search-table" id="EmployeeDTTable">
                 <thead>
                     <tr>
                         <th>EmpID</th>
@@ -18,8 +17,8 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    <tr class="table-default search-items">
-                        <td>100</td>
+              @*       <tr class="table-default search-items">
+                        <td></td>
                         <td>Anurag</td>
                         <td>6206549836</td>
                         <td>100</td>
@@ -29,12 +28,12 @@
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item view" href=""><i class="far fa-eye"></i> View</a>
-@*                                     <a class="dropdown-item edit" href=""><i class="mdi mdi-pencil-outline me-1"></i> Edit</a> *@
+@*                                     <a class="dropdown-item edit" href=""><i class="mdi mdi-pencil-outline me-1"></i> Edit</a> 
                                     <a class="dropdown-item deleteEmployee" href="javascript:void(0);"><i class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
                                 </div>
                             </div>
                         </td>
-                    </tr>
+                    </tr> *@
                     <!-- More rows here -->
                 </tbody>
             </table>

@@ -2,6 +2,7 @@
 using EmployeeManagement.Core.Entities;
 using EmployeeManagement.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace AspnetCoreMvcFull.Controllers
 {
@@ -19,6 +20,28 @@ namespace AspnetCoreMvcFull.Controllers
             return View();
         }
 
+
+
+        public async Task<IActionResult> GetEmployeeDetailsInTableForm()
+        {
+
+            try
+            {
+                var responce = await ProxyService.GetEmployeeDetailsInTableForm();
+                return Json(responce);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = "response failed" });
+            }
+
+
+
+            return Json(new { success = false, error = "Invalid Employee " });
+
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> CreateEmployeeData([FromBody] EmployeeEntity employeeEntity)
         {
@@ -28,14 +51,11 @@ namespace AspnetCoreMvcFull.Controllers
             {
                 return Json(new { success = false, error = "Invalid Employee " });
             }
-           
             try
             {
-            
-                    // Use the _proxyService to create a new employee
+                      // Use the _proxyService to create a new employee
                 var responce = await ProxyService.CreateEmployeeAsync(employeeEntity);
-                return Json(new { success = responce, message = "Employee created successfully." });
-
+                return Json(new { success = responce, message = "Employee Add successfully." });
 
             }
             catch
@@ -50,26 +70,29 @@ namespace AspnetCoreMvcFull.Controllers
             return Json(new { success = false, error = "Invalid Employee " });
         }
 
-        [HttpPost]
+        [HttpGet]
         //[Route("ViewEmployeeAllDetails")]
-        public IActionResult ViewEmployeeAllDetails([FromBody] EmployeeDataInIDEntity employeeDataInIDEntity)
+        public async Task<IActionResult> ViewEmployeeAllDetails([FromBody] EmployeeDataInIDEntity employeeDataInIDEntity)
         {
-            if (employeeDataInIDEntity.EmpID <= 0)
+            if (!ModelState.IsValid)
             {
-                return Json(new { success = false, error = "Invalid Employee ID" });
+                return Json(new { success = false, error = "Invalid Employee " });
+            }
+            try {
+
+                var responce = await ProxyService.ViewEmployeeAllDetails(employeeDataInIDEntity);
+                return Json(responce);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = "response failed" });
             }
 
-            var empID = employeeDataInIDEntity.EmpID;
-            var employeeDetails = GetEmployeeDetails(empID);
 
-            if (employeeDetails != null)
-            {
-                return Json(new { success = true, data = employeeDetails });
-            }
-            else
-            {
-                return Json(new { success = false, error = "Employee not found" });
-            }
+
+            return Json(new { success = false, error = "response failed" });
+
+
         }
 
         [HttpPost]
@@ -88,54 +111,58 @@ namespace AspnetCoreMvcFull.Controllers
             }
         }
 
-        private EmployeeDetails GetEmployeeDetails(int empID)
-        {
-            return new EmployeeDetails
-            {
-                EmpID = empID,
-                EmpName = "John Doe",
-                EmpPosition = "Software Engineer"
-                // Add other fields as needed
-            };
-        }
+        //private EmployeeDetails GetEmployeeDetails(int empID)
+        //{
+        //    return new EmployeeDetails
+        //    {
+        //        EmpID = empID,
+        //        EmpName = "John Doe",
+        //        EmpPosition = "Software Engineer"
+        //        // Add other fields as needed
+        //    };
+        //}
 
         private bool UpdateEmployeeDetails(EmployeeDetails updatedDetails)
         {
             return true; // Replace with actual update logic
         }
-
-        [HttpPost]
-       // [Route("DeleteEmployeeDetails")] // Ensure this matches your AJAX request URL
-        public IActionResult DeleteEmployeeDetails([FromBody] EmployeeDataInIDEntity employeeDataInIDEntity)
-        {
-            bool deleteSuccess = DeleteEmployee(employeeDataInIDEntity.EmpID); // Assume EmpID is sufficient for deletion
-
-            if (deleteSuccess)
+        /// <summary>
+        /// Used to  Delete Template Field
+        /// </summary>
+        /// <param name="EmployeeDataInIDEntity"></param>
+        /// <returns></returns>
+             [HttpPost]
+            public async Task<JsonResult> DeleteSingleEmployeeDetails([FromBody] EmployeeDataInIDEntity employeeDataInIDEntity)
             {
-                return Json(new { success = true, message = "Employee deleted successfully." });
+                bool isSuccess = false;
+               
+                try
+                {
+                    isSuccess = await ProxyService.DeleteSingleEmployeeDetails(employeeDataInIDEntity);
+              
+                if (isSuccess == true)
+                    {
+                     //   CacheManager.DeleteAllKeys(templateField.TenantId);
+
+                    }
+                    return Json(isSuccess);
+
+                }
+                catch (Exception ex)
+                {
+                    //using (LogException _error = new LogException(typeof(ConfigurationController), TenantCache.GetSqlDbConnectionFromCacheByTenantId(UserInfo.GetTenantId())))
+                    //{
+                    //    _error.Exception("Exception in DeleteTemplateField:", ex, TenantCache.GetSubDomainByTenantId((Guid)UserInfo.GetTenantId()), UserInfo.GetUserName(), templateField);
+
+                    //}
+
+                }
+                return Json(isSuccess);
+
             }
-            else
-            {
-                return Json(new { success = false, error = "Error deleting employee details" });
-            }
-        }
-
-        // Dummy method for deleting employee details
-        private bool DeleteEmployee(int empID)
-        {
-            // Your delete logic here
-            // Return true if deletion is successful, otherwise false
-            return true; // Replace with actual delete result
-        }
-
-
-
-
-
-
-
-
     }
+
+    
 }
 
 

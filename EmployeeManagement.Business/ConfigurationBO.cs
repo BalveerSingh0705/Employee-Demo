@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.Business.Base;
 using EmployeeManagement.Core.Common;
+using EmployeeManagement.Core.Entities;
 using EmployeeManagement.DAO;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,25 @@ namespace EmployeeManagement.Business
         {
             return DAO.SaveOrUpdateEmployeeDetails(employeeEntity);
         }
+        public List<TableFormEntity> GetEmployeeDetailsInTableForm()
+        {
+            return DAO.GetEmployeeDetailsInTableForm();
+        }
+
+        public List<EmployeeEntity> GetEmployeeDetailsClickOnEditButton(EmployeeDataInIDEntity employeeDataInIDEntity)
+        {
+            return DAO.GetEmployeeDetailsClickOnEditButton(employeeDataInIDEntity);
+        }
+
+        public object DeleteSingleEmployeeDetails(EmployeeDataInIDEntity employeeDataInIDEntity)
+        {
+            return DAO.DeleteSingleEmployeeDetails(employeeDataInIDEntity);
+        }
+
+        //public object GetEmployeeDetailsClickOnEditButton(EmployeeDataInIDEntity employeeDataInIDEntity)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
+  
 }
