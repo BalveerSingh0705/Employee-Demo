@@ -31,6 +31,11 @@ namespace EmployeeManagement.Business
             return DAO.DeleteSingleEmployeeDetails(employeeDataInIDEntity);
         }
 
+        public object SaveEmployeeChangesInfo(EmployeeEntity employeeEntity)
+        {
+            return DAO.SaveEmployeeChangesInfo(employeeEntity);
+        }
+
         //public object GetEmployeeDetailsClickOnEditButton(EmployeeDataInIDEntity employeeDataInIDEntity)
         //{
         //    throw new NotImplementedException();

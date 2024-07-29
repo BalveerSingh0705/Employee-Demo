@@ -16,5 +16,6 @@ namespace EmployeeManagement.DAO
       //  List<EmployeeEntity> DeleteSingleEmployeeDetails(EmployeeDataInIDEntity employeeDataInIDEntity);
         List<EmployeeEntity> GetEmployeeDetailsClickOnEditButton(EmployeeDataInIDEntity employeeDataInIDEntity);
         bool DeleteSingleEmployeeDetails(EmployeeDataInIDEntity employeeDataInIDEntity);
+        bool SaveEmployeeChangesInfo(EmployeeEntity employeeEntity);
     }
 }

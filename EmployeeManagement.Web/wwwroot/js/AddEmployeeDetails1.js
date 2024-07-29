@@ -1,10 +1,8 @@
 ﻿$(document).ready(function () {
-    function GetAllEmployeeDetailsInTableFormat();
+    GetAllEmployeeDetailsInTableFormat();
 });
 
-function GetAllEmployeeDetailsInTableFormat()
-{
-
+function GetAllEmployeeDetailsInTableFormat() {
     $.ajax({
         url: '/AddEmployee/GetEmployeeDetailsInTableForm',
         method: 'GET',
@@ -18,7 +16,6 @@ function GetAllEmployeeDetailsInTableFormat()
                 data.forEach(function (employee) {
                     var name = employee.firstName + " " + employee.lastName;
                     var row = `<tr class="table-default search-items">
-                                    name=
                                 <td>${employee.empID}</td>
                                 <td>${name}</td>
                                 <td>${employee.phoneNo}</td>
@@ -28,16 +25,14 @@ function GetAllEmployeeDetailsInTableFormat()
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item EmployeeDTView" onclick="GetEmployeeAllInformationClickViewButton('${employee.empID}')" href=""><i class="far fa-eye"></i> View</a>
-                                            <a class="dropdown-item deleteEmployee" onclick="deleteEmployeeInformation('${employee.empID}')" ><i class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
+                                            <a class="dropdown-item EmployeeDTView" onclick="GetEmployeeAllInformationClickViewButton('${employee.empID}', event)" href="#"><i class="far fa-eye"></i> View</a>
+                                            <a class="dropdown-item deleteEmployee" onclick="deleteEmployeeInformation('${employee.empID}', event)" href="#"><i class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>`;
                     tableBody.append(row);
                 });
-
-                //  $('#successMessage').show().delay(3000).fadeOut(); // Display success message
             } else {
                 console.error("Expected data to be an array but got:", data);
             }
@@ -46,34 +41,33 @@ function GetAllEmployeeDetailsInTableFormat()
             console.error('Error fetching employee data', error);
         }
     });
-
-
 }
 
-
-
-
-
-
 // View Employee Information click on view button.
-function GetEmployeeAllInformationClickViewButton(empId) {
-    alert(empId);
+function GetEmployeeAllInformationClickViewButton(empId, event) {
+    event.preventDefault(); // Prevent the default link behavior
+    // Debugging purpose to ensure function is called
+
     $.ajax({
-        url: '/AddEmployee/ViewEmployeeAllDetails', // Replace with your controller endpoint URL
+        url: '/AddEmployee/GetEmployeeDetailsClickOnEditButton', // Your controller endpoint URL
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ EmpID: empId }),
         success: function (response) {
-            alert('Data received successfully: ' + response.message);
-            OpenModels(response);
+           
+            if (response && response.message) {
+           
+                OpenModels(response);
+            } else {
+               error('Unexpected response format.');
+            }
         },
         error: function (error) {
-            alert('Error: ' + error.responseText);
+            console.error('Error:', error);
+            console.error('Error: ' + (error.responseText || 'Unknown error'));
         }
     });
 }
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const rowsPerPage = 7;
@@ -117,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
     // Search Specific employee
     function handleSearch() {
         const searchValue = document.getElementById("SearchItem").value.trim().toLowerCase();
@@ -136,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPage = 1; // Reset to first page on search
         displayRows();
         updatePaginationControls();
-        // showSuccessMessage(); // Uncomment if you want to show success message on search
     }
 
     document.getElementById("SearchItem").addEventListener("keyup", handleSearch);
@@ -157,19 +149,51 @@ document.addEventListener("DOMContentLoaded", function () {
     updatePaginationControls();
 });
 
-//View  and edit single employee when click view button
-
+// View and edit single employee when clicking view button
 document.getElementById('closeModal').addEventListener('click', function () {
-    // window.location.href = '/AddEmployee/AddEmployeePage';  // Replace with the actual URL you want to redirect to
     $('#viewEmployeeModal').modal('hide');
 });
 
 function OpenModels(data) {
     // Update modal with employee details
-    $('#empID').text(data.data.empID);
-    $('#empName').text(data.data.empName);
-    $('#empPosition').text(data.data.empPosition);
-    // Add other fields as needed
+    const employee = data.success[0];
+
+    var dateOfJoining = employee.dateOfJoining.split("T")[0];
+    var createdDate = employee.createdDate.split("T")[0];
+    var modifiedDate = employee.modifiedDate.split("T")[0];
+    var dateOfBirth = employee.dateOfBirth.split("T")[0];
+    
+
+    $('#empID').text(employee.empID);
+    $('#firstName').text(employee.firstName);
+    $('#lastName').text(employee.lastName);
+    $('#phone').text(employee.phone);
+    $('#designation').text(employee.designation);
+    $('#experience').text(employee.experience);
+    $('#dateOfBirth').text(dateOfBirth);
+    $('#dateOfJoining').text(dateOfJoining);
+    $('#address').text(employee.address);
+    $('#pinCode').text(employee.pinCode);
+    $('#city').text(employee.city);
+    $('#state').text(employee.state);
+    $('#Location').text(employee.location);
+    $('#panNumber').text(employee.panNumber);
+    $('#aadhaarCard').text(employee.aadhaarCard);
+    $('#contactSite').text(employee.contactSite);
+    $('#bankName').text(employee.bankName);
+    $('#bankAddress').text(employee.bankAddress);
+    $('#accountNumber').text(employee.accountNumber);
+    $('#iFSC').text(employee.iFSC);
+    $('#salary').text(employee.salary);
+    $('#pFNumber').text(employee.pFNumber);
+    $('#workingHours').text(employee.workingHours);
+    $('#createdBy').text(employee.createdBy);
+    $('#modifiedBy').text(employee.modifiedBy);
+    $('#createdDate').text(createdDate);
+    $('#modifiedDate').text(modifiedDate);
+    $('#roleCode').text(employee.roleCode);
+    $('#userId').text(employee.userId);
+    $('#userName').text(employee.userName);
 
     // Show the modal
     $('#viewEmployeeModal').modal('show');
@@ -187,10 +211,36 @@ function OpenModels(data) {
     // Handle save changes button click
     $('#saveChangesBtn').off('click').on('click', function () {
         var updatedData = {
-            empID: data.data.empID,
-            empName: $('#empName').text().trim(),
-            empPosition: $('#empPosition').text().trim()
-            // Add other updated fields here
+            empID: employee.empID,
+            firstName: $('#firstName').text().trim(),
+            lastName: $('#lastName').text().trim(),
+            phone: $('#phone').text().trim(),
+            designation: $('#designation').text().trim(),
+            experience: parseInt($('#experience').text().trim(), 10),
+            dateOfBirth: new Date($('#dateOfBirth').text().trim()),
+            dateOfJoining: new Date($('#dateOfJoining').text().trim()),
+            address: $('#address').text().trim(),
+            pinCode: $('#pinCode').text().trim(),
+            city: $('#city').text().trim(),
+            location: $('#Location').text().trim(),
+            state: $('#state').text().trim(),
+            panNumber: $('#panNumber').text().trim(),
+            aadhaarCard: $('#aadhaarCard').text().trim(),
+            contactSite: $('#contactSite').text().trim(),
+            bankName: $('#bankName').text().trim(),
+            bankAddress: $('#bankAddress').text().trim(),
+            accountNumber: $('#accountNumber').text().trim(),
+            iFSC: $('#iFSC').text().trim(),
+            salary: parseFloat($('#salary').text().trim()),
+            pFNumber: $('#pFNumber').text().trim(),
+            workingHours: $('#workingHours').text().trim(),
+            createdBy: $('#createdBy').text().trim(),
+            modifiedBy: $('#modifiedBy').text().trim(),
+            createdDate: new Date($('#createdDate').text().trim()),
+            modifiedDate: new Date($('#modifiedDate').text().trim()),
+            roleCode: $('#roleCode').text().trim(),
+            userId: $('#userId').text().trim(),
+            userName: $('#userName').text().trim(),
         };
 
         saveChanges(updatedData);
@@ -202,8 +252,7 @@ function OpenModels(data) {
 
 function enableEditMode() {
     // Enable editing on fields
-    $('#empName').attr('contenteditable', 'true');
-    $('#empPosition').attr('contenteditable', 'true');
+    $('#firstName, #lastName, #phone, #designation, #experience, #dateOfBirth, #dateOfJoining, #address, #pinCode, #city, #state, #panNumber, #aadhaarCard, #contactSite,#Location, #bankName, #bankAddress, #accountNumber, #iFSC, #salary, #pFNumber, #workingHours, #createdBy, #modifiedBy, #createdDate, #modifiedDate, #roleCode, #userId, #userName').attr('contenteditable', 'true');
     // Show save and cancel buttons
     $('#saveChangesBtn').removeClass('hide');
     $('#cancelBtn').removeClass('hide');
@@ -212,8 +261,7 @@ function enableEditMode() {
 
 function disableEditMode() {
     // Disable editing on fields
-    $('#empName').attr('contenteditable', 'false');
-    $('#empPosition').attr('contenteditable', 'false');
+    $('#firstName, #lastName, #phone, #designation, #experience,#Location #dateOfBirth, #dateOfJoining, #address, #pinCode, #city, #state, #panNumber, #aadhaarCard, #contactSite, #bankName, #bankAddress, #accountNumber, #iFSC, #salary, #pFNumber, #workingHours, #createdBy, #modifiedBy, #createdDate, #modifiedDate, #roleCode, #userId, #userName').attr('contenteditable', 'false');
     // Hide save and cancel buttons
     $('#saveChangesBtn').addClass('hide');
     $('#cancelBtn').addClass('hide');
@@ -222,25 +270,17 @@ function disableEditMode() {
 
 function saveChanges(updatedData) {
     $.ajax({
-        url: '/AddEmployee/SaveEmployeeChanges', // Replace with your controller endpoint URL
+        url: '/AddEmployee/SaveEmployeeChangesInfo', // Your controller endpoint URL
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(updatedData),
         success: function (response) {
             if (response.success) {
                 console.log("Changes saved successfully:", response);
-                // Update the modal with saved changes
-                $('#empName').text(response.empName);
-                $('#empPosition').text(response.empPosition);
-                // Add other fields as needed
                 disableEditMode();
+                $('#viewEmployeeModal').modal('hide');
+                showSuccessMessage("Update Employee... ");
                 $('#alertSuccess').removeClass('hide');
-                setTimeout(function () {
-                    $('#alertSuccess').addClass('hide');
-                }, 3000); // Hide after 3 seconds
-            
-
-
             } else {
                 console.error("Error saving changes:", response.error);
             }
@@ -254,11 +294,10 @@ function saveChanges(updatedData) {
 
 
 
+// Delete Table data 
+function deleteEmployeeInformation(empId, event) {
+    event.preventDefault(); // Prevent the default link behavior
 
-
-
-//Delete Table data 
-function deleteEmployeeInformation(empId) {
     $.ajax({
         url: '/AddEmployee/DeleteSingleEmployeeDetails', // Ensure this matches your controller endpoint URL
         type: 'POST',
@@ -266,23 +305,21 @@ function deleteEmployeeInformation(empId) {
         data: JSON.stringify({ EmpID: empId }), // Send the employee ID in the request body
         success: function (response) {
             if (response == true) {
-
-               
-                showSuccessMessage("Table deleted successfully.");
-
+                showSuccessMessage("Employee deleted successfully.");
+                // Optionally remove the deleted row from the table
+                GetAllEmployeeDetailsInTableFormat();
             } else {
                 alert('Error: ' + response.error);
             }
         },
         error: function (error) {
-          
+            console.error('Error deleting employee:', error);
             showSuccessMessage('Error: ' + error.responseText);
         }
     });
 }
 
-
-// Success And Error massage.
+// Success And Error message.
 function showSuccessMessage(customMessage) {
     var messageElement = document.getElementById("messageContent");
     var successMessageDiv = document.getElementById("successMessage");
@@ -306,7 +343,3 @@ function showSuccessMessage(customMessage) {
         console.log("Message hidden");
     }, 5000);
 }
-
-// Test the function
-
-

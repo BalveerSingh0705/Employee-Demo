@@ -1,4 +1,6 @@
-﻿using EmployeeManagement.Core.Common;
+﻿using AngleSharp.Io;
+using Azure;
+using EmployeeManagement.Core.Common;
 using EmployeeManagement.Core.Entities;
 using EmployeeManagement.Web.Helper;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +47,6 @@ namespace AspnetCoreMvcFull.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateEmployeeData([FromBody] EmployeeEntity employeeEntity)
         {
-            var emp =  employeeEntity.aadhaarCard;
             // Here, you can implement the logic for creating the employee data
             if (!ModelState.IsValid)
             {
@@ -70,9 +71,9 @@ namespace AspnetCoreMvcFull.Controllers
             return Json(new { success = false, error = "Invalid Employee " });
         }
 
-        [HttpGet]
+        [HttpPost]
         //[Route("ViewEmployeeAllDetails")]
-        public async Task<IActionResult> ViewEmployeeAllDetails([FromBody] EmployeeDataInIDEntity employeeDataInIDEntity)
+        public async Task<IActionResult> GetEmployeeDetailsClickOnEditButton([FromBody] EmployeeDataInIDEntity employeeDataInIDEntity)
         {
             if (!ModelState.IsValid)
             {
@@ -80,8 +81,8 @@ namespace AspnetCoreMvcFull.Controllers
             }
             try {
 
-                var responce = await ProxyService.ViewEmployeeAllDetails(employeeDataInIDEntity);
-                return Json(responce);
+                var response = await ProxyService.GetEmployeeDetailsClickOnEditButton(employeeDataInIDEntity);
+                return Json(new { success = response, message = "Employee Add successfully." });
             }
             catch (Exception ex)
             {
@@ -96,36 +97,36 @@ namespace AspnetCoreMvcFull.Controllers
         }
 
         [HttpPost]
-       // [Route("SaveEmployeeChanges")]
-        public IActionResult SaveEmployeeChanges([FromBody] EmployeeDetails updatedDetails)
+        // [Route("SaveEmployeeChanges")]
+        public async Task<IActionResult> SaveEmployeeChangesInfo([FromBody] EmployeeEntity employeeEntity)
         {
-            bool updateSuccess = UpdateEmployeeDetails(updatedDetails);
+            {
+                // Here, you can implement the logic for creating the employee data
+                if (!ModelState.IsValid)
+                {
+                    return Json(new { success = false, error = "Invalid Employee " });
+                }
+                try
+                {
+                    // Use the _proxyService to create a new employee
+                    var responce = await ProxyService.SaveEmployeeChangesInfo(employeeEntity);
+                    return Json(new { success = responce, message = "Employee Add successfully." });
 
-            if (updateSuccess)
-            {
-                return Json(new { success = true, empName = updatedDetails.EmpName, empPosition = updatedDetails.EmpPosition });
-            }
-            else
-            {
-                return Json(new { success = false, error = "Error updating employee details" });
+                }
+                catch
+                {
+                    //{
+                    //  //  return Json(new { success = false, message = "Validation failed.", errors = ModelState.Values.SelectMany(v => v.Errors) });
+                    //    ModelState.AddModelError("", ex.Message);
+                    //}
+                }
+                // Save employee data logic here
+
+                return Json(new { success = false, error = "Invalid Employee " });
             }
         }
 
-        //private EmployeeDetails GetEmployeeDetails(int empID)
-        //{
-        //    return new EmployeeDetails
-        //    {
-        //        EmpID = empID,
-        //        EmpName = "John Doe",
-        //        EmpPosition = "Software Engineer"
-        //        // Add other fields as needed
-        //    };
-        //}
-
-        private bool UpdateEmployeeDetails(EmployeeDetails updatedDetails)
-        {
-            return true; // Replace with actual update logic
-        }
+     
         /// <summary>
         /// Used to  Delete Template Field
         /// </summary>
