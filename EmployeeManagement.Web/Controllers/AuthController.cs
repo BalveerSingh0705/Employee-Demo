@@ -8,7 +8,14 @@ namespace AspnetCoreMvcFull.Controllers;
 /// </summary>
 public class AuthController : Controller
 {
-  public IActionResult ForgotPasswordBasic() => View();
+
+    public IActionResult RegisterBasic()
+    {
+
+        return View();
+    }
+
+    public IActionResult ForgotPasswordBasic() => View();
   public IActionResult LoginBasic() => View();
-  public IActionResult RegisterBasic() => View();
+
 }

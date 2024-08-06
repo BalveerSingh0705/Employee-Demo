@@ -66,7 +66,7 @@ namespace AspnetCoreMvcFull.Controllers
                 //    ModelState.AddModelError("", ex.Message);
                 //}
             }
-            // Save employee data logic here
+            
 
             return Json(new { success = false, error = "Invalid Employee " });
         }

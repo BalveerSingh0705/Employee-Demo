@@ -1,0 +1,99 @@
+﻿<div class="card">
+    <h5 class="card-header">Contextual Classes</h5>
+    <div class="table-responsive text-nowrap">
+        <table class="table search-table" id="EmployeeAttendance">
+            <thead>
+                <tr>
+                    <th>EmpID</th>
+                    <th>Name</th>
+                    <th>SignIn</th>
+                    <th>SignOut</th>
+                    <th>P</th>
+                    <th>A</th>
+                    <th>OT</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                <tr class="table-default search-items">
+                    <td>EMP100</td>
+                    <td>Anurag</td>
+                    <td>9:30</td>
+                    <td>5:10</td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="attendanceEMP100" id="P_EMP100" value="P" checked>
+                            <label class="form-check-label" for="P_EMP100"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="attendanceEMP100" id="A_EMP100" value="A">
+                            <label class="form-check-label" for="A_EMP100"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="attendanceEMP100" id="OT_EMP100" value="OT">
+                            <label class="form-check-label" for="OT_EMP100"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item view" href=""><i class="far fa-eye"></i> View</a>
+                                <a class="dropdown-item edit" href=""><i class="mdi mdi-pencil-outline me-1"></i> Edit</a>
+                                <a class="dropdown-item deleteEmployee" href="javascript:void(0);"><i class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- More rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+        <li class="page-item" id="prevPage">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <span id="pageIndicator" class="page-link">Page 1</span>
+        <li class="page-item" id="nextPage">
+            <a class="page-link" href="#">Next</a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="otModal" tabindex="-1" aria-labelledby="otModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="otModalLabel">Overtime Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="otForm">
+                    <div class="mb-3">
+                        <label for="otHours" class="form-label">Hours</label>
+                        <input type="number" class="form-control" id="otHours" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="otComment" class="form-label">Comment</label>
+                        <textarea class="form-control" id="otComment" rows="3" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveOtDetails">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
