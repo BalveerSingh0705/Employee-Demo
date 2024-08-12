@@ -359,6 +359,72 @@ namespace EmployeeManagement.Web.Helper
             }
             return isSuccess;
         }
+
+        public static async Task<List<AttendanceTableEntity>> GetEmployeeDetailsInAttendanceTable()
+        {
+            List<AttendanceTableEntity> attendanceTableEntity = new List<AttendanceTableEntity>();
+
+            try
+            {
+                // Ensure the URL for the API endpoint is correct.
+                string url = ServiceVirtualDirName + "api/EmployeeConfiguration/GetEmployeeDetailsInAttendanceTable";
+
+                // Use the BaseProxy class to perform the GET operation.
+                var response = await BaseProxy.Instance.GetAsyncMethod(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    attendanceTableEntity = JsonConvert.DeserializeObject<List<AttendanceTableEntity>>(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed.
+                // Example: LogError("GetEmployeeAttendances", ex);
+
+                // Optionally rethrow the exception or handle it in a way that informs the caller
+                throw new Exception("An error occurred while fetching employee attendances.", ex);
+            }
+
+            return attendanceTableEntity;
+        }
+
+        public static async Task<bool> SendEmployeeAttendanceDetails(List<AttendanceDataSendEntity>  attendanceDataSendEntity)
+        {
+            bool isSuccess = false;
+            try
+            {
+                // Ensure the URL for the API endpoint is correct.
+                string url = ServiceVirtualDirName + "api/EmployeeConfiguration/SendEmployeeAttendanceDetails";
+
+                // Use the BaseProxy class to perform the POST operation.
+                var response = await BaseProxy.Instance.PostAsyncMethod(url, attendanceDataSendEntity);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read the response content asynchronously.
+                    string result = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize the result to a boolean.
+                    isSuccess = JsonConvert.DeserializeObject<bool>(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed.
+                //using (LogException _error = new LogException(typeof(ProxyService), TenantCache.GetSqlDbConnectionFromCacheByTenantId(employeeEntity.TenantId)))
+                //{
+                //    _error.Exception("Error in CreateEmployeeAsync", ex, TenantCache.GetSubDomainByTenantId((Guid)employeeEntity.TenantId), UserInfo.GetUserName(), employeeEntity);
+                //}
+
+                // Optionally rethrow the exception or handle it in a way that informs the caller
+                throw;
+            }
+            return isSuccess;
+        }
+
+
     }
 }
 

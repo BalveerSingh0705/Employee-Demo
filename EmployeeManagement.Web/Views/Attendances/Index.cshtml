@@ -1,25 +1,19 @@
-﻿
-<head>
-    <!-- Include flatpickr CSS -->
-    <link href="~/vendor/css/flatpickr.min.css" rel="stylesheet" />
-</head>
-<body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" id="SearchItem" aria-label="Search">
-            </div>
-            <div class="d-flex ms-auto">
-                <a class="btn btn-primary" href="/AddEmployee/AddEmployeePage">All Submit</a>
-            </div>
+﻿<!-- Include flatpickr CSS -->
+<link href="~/vendor/css/flatpickr.min.css" rel="stylesheet" />
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" id="SearchItem" aria-label="Search">
+            <input class="form-control ms-2" type="text" placeholder="Select Date" id="DatePicker" aria-label="Date">
         </div>
-    </nav>
+        <div class="d-flex ms-auto">
+            <button class="btn btn-primary" id="submitAll" onclick="SubmitAllAttendanceData()">All Submit</button>
+        </div>
+    </div>
+</nav>
 
-    <partial name="_tableViewInAttendances" />
+<partial name="_tableViewInAttendances" />
 
-
-    <script src="~/vendor/js/flatpickr.js"></script>
-    <script src="~/js/attendance.js"></script>
-
-</body>
-
+<script src="~/vendor/js/flatpickr.js"></script>
+<script src="~/js/attendance.js"></script>a

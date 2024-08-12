@@ -36,10 +36,15 @@ namespace EmployeeManagement.Business
             return DAO.SaveEmployeeChangesInfo(employeeEntity);
         }
 
-        //public object GetEmployeeDetailsClickOnEditButton(EmployeeDataInIDEntity employeeDataInIDEntity)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public List<AttendanceTableEntity> GetEmployeeDetailsInAttendanceTable()
+        {
+            return DAO.GetEmployeeDetailsInAttendanceTable();
+        }
+
+        public bool SendEmployeeAttendanceDetails(List<AttendanceDataSendEntity> attendanceDataSendEntity)
+        {
+            return DAO.SendEmployeeAttendanceDetails(attendanceDataSendEntity);
+        }
     }
   
 }

@@ -91,25 +91,14 @@
                         <div>AddEmployee</div>
                     </a>
                 </li>
-                <li class='menu-item@(currentPage == "Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Attendances" asp-action="Index" class="menu-link">
-                        <div>Attendances</div>
-                    </a>
-                </li>
+                <li class='menu-item@(currentPage == "Attendances/Index" ? " active" : "")' >
+                    <a asp-controller="Attendances" asp-action="Index" class="menu-link" onclick="getAttendanceDataInTableFormat()">
+               <div>Attendances</div>
+             </a>
+            </li>
+
             </ul>
         </li>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <!-- Layouts -->

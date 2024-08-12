@@ -216,7 +216,7 @@ namespace EmployeeManagement.DAO
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                   
+
                     connection.Open();
                     using (SqlCommand command = new SqlCommand("usp_DeleteSingleEmployeeDetails", connection))
                     {
@@ -239,7 +239,7 @@ namespace EmployeeManagement.DAO
             return isSuccess;
         }
 
-      public bool SaveEmployeeChangesInfo(EmployeeEntity employee)
+        public bool SaveEmployeeChangesInfo(EmployeeEntity employee)
         {
             bool isSuccess = false;
             try
@@ -295,21 +295,125 @@ namespace EmployeeManagement.DAO
             }
 
             return isSuccess;
-      }
+        }
 
+        public List<AttendanceTableEntity> GetEmployeeDetailsInAttendanceTable()
+        {
+            List<AttendanceTableEntity> attendanceTableEntity = new List<AttendanceTableEntity>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("usp_GetAttendenceTableEmployeeInfo", connection))
+                    {
+                        command.CommandTimeout = 60;
+                        command.CommandType = CommandType.StoredProcedure;
 
+                        // Add parameters if needed
+                        // command.Parameters.Add("@ParameterName", SqlDbType.NVarChar).Value = tableFormEntity.SomeProperty;
 
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                AttendanceTableEntity employee = new AttendanceTableEntity
+                                {
+                                    EmpID = reader["EmpID"].ToString(),
+                                    FirstName = reader["FirstName"].ToString(),
+                                    LastName = reader["LastName"].ToString(),
+                                    Designation = reader["Designation"].ToString(),
+                                    WorkingHours = reader["WorkingHours"].ToString() // Corrected property name
+                                };
+                                attendanceTableEntity.Add(employee); // Use the correct list variable
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception (log it, rethrow it, etc.)
+                throw new Exception("An error occurred while fetching employee details in table form", ex);
+            }
+            return attendanceTableEntity; // Return the correct list
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="employeeAttendanceEntity"></param>
+        /// <returns></returns>
+        public bool SendEmployeeAttendanceDetails(List<AttendanceDataSendEntity> attendanceDataList)
+        {
+            bool isSuccess = false;
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
 
+                    foreach (var attendanceData in attendanceDataList)
+                    {
+                        // Check if the attendance record for the date exists
+                        bool recordExists = false;
+                        using (SqlCommand checkCommand = new SqlCommand("usp_CheckAttendanceExists", connection))
+                        {
+                            checkCommand.CommandType = CommandType.StoredProcedure;
+                            checkCommand.Parameters.Add("@EmpID", SqlDbType.NVarChar).Value = attendanceData.EmpID;
+                            checkCommand.Parameters.Add("@AttendanceDate", SqlDbType.DateTime).Value = attendanceData.AttendanceDate;
 
+                            recordExists = Convert.ToBoolean(checkCommand.ExecuteScalar());
+                        }
 
+                        // Use different stored procedures for insert or update based on whether the record exists
+                        string storedProcedure = recordExists ? "usp_UpdateUserInfo" : "usp_InsertUserAttendanceInfo";
+                        using (SqlCommand command = new SqlCommand(storedProcedure, connection))
+                        {
+                            command.CommandTimeout = 60;
+                            command.CommandType = CommandType.StoredProcedure;
+
+                            // Add parameters common for both insert and update
+                            command.Parameters.Add("@EmpID", SqlDbType.NVarChar).Value = attendanceData.EmpID;
+                            command.Parameters.Add("@Attendance", SqlDbType.NVarChar).Value = attendanceData.Attendance;
+                            command.Parameters.Add("@AttendanceDate", SqlDbType.DateTime).Value = attendanceData.AttendanceDate;
+
+                            // Add parameters for the OTDetails properties
+                            if (attendanceData.OTDetails != null)
+                            {
+                                command.Parameters.Add("@OTEmpID", SqlDbType.NVarChar).Value = attendanceData.OTDetails.EmpID;
+                                command.Parameters.Add("@Hours", SqlDbType.Int).Value = attendanceData.OTDetails.Hours;
+                                command.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = attendanceData.OTDetails.Comment;
+                            }
+                            else
+                            {
+                                command.Parameters.Add("@OTEmpID", SqlDbType.NVarChar).Value = DBNull.Value;
+                                command.Parameters.Add("@Hours", SqlDbType.Int).Value = DBNull.Value;
+                                command.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = DBNull.Value;
+                            }
+
+                            // Execute the command
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    isSuccess = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                // Log exception details here (e.g., using a logging framework)
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return isSuccess;
+        }
 
 
 
     }
+
 }
-
-
 
 
 

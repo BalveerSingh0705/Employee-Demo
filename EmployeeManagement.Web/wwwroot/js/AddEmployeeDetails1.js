@@ -7,8 +7,6 @@ function GetAllEmployeeDetailsInTableFormat() {
         url: '/AddEmployee/GetEmployeeDetailsInTableForm',
         method: 'GET',
         success: function (data) {
-            console.log("Data received:", data); // Debug: log the received data
-
             var tableBody = $('.search-table tbody');
             tableBody.empty(); // Clear any existing rows
 
