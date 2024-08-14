@@ -59,27 +59,6 @@
       </ul>
     </li>
         <!-- HR -->
-@*         <li class='menu-item@(currentPage.StartsWith("AddEmployee") ? " active open" : "")'>
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
-                <div>HR</div>
-            </a>
-            <ul class="menu-sub">
-                <li class='menu-item@(currentPage == "/AddEmployee/AddEmployeeDetails" ? " active" : "")'>
-                    <a asp-controller="AddEmployee" asp-action="AddEmployeeDetails" class="menu-link" target="_blank">
-                        <div>AddEmployee</div>
-                    </a>
-                </li>
-                <li class='menu-item@(currentPage == "/Pages/MiscUnderMaintenance" ? " active" : "")'>
-                    <a asp-controller="Pages" asp-action="MiscUnderMaintenance" class="menu-link" target="_blank">
-                        <div>attendence</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
- *@
-
-
         <li class='menu-item@(currentPage.StartsWith("/AddEmployee") ? " active open" : "")'>
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-star-outline"></i>
@@ -91,11 +70,33 @@
                         <div>AddEmployee</div>
                     </a>
                 </li>
-                <li class='menu-item@(currentPage == "Attendances/Index" ? " active" : "")' >
+                <li class='menu-item@(currentPage == "/Attendances/Index" ? " active" : "")' >
                     <a asp-controller="Attendances" asp-action="Index" class="menu-link" onclick="getAttendanceDataInTableFormat()">
                <div>Attendances</div>
              </a>
             </li>
+
+            </ul>
+        </li>   
+        
+        
+        <!-- Finance -->
+        <li class='menu-item@(currentPage.StartsWith("/Finance") ? " active open" : "")'>
+            <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-star-outline"></i>
+                <div>Finance</div>
+            </a>
+            <ul class="menu-sub">
+                <li class='menu-item@(currentPage == "/Finance/Salary" ? " active" : "")'>
+                    <a asp-controller="Finance" asp-action="Salary" class="menu-link">
+                        <div>Salary</div>
+                    </a>
+                </li>
+                <li class='menu-item@(currentPage == "/Finance/Index" ? " active" : "")'>
+                    <a asp-controller="Finance" asp-action="Advance" class="menu-link" >
+                        <div>Advance</div>
+                    </a>
+                </li>
 
             </ul>
         </li>

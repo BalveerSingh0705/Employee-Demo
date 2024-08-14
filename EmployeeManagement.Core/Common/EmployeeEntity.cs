@@ -80,10 +80,19 @@ namespace EmployeeManagement.Core.Common
             [Required(ErrorMessage = "Working Hours are required")]
             public string workingHours { get; set; }
 
+        public string familyContactNumber { get; set; }
+        public string nature { get; set; }
+        public string esiNumber { get; set; }
+
+        public string vanNumber {  get; set; }
+
+
+
+
 
             //public bool checkmeout { get; set; }
 
-       
+
     }
 
   

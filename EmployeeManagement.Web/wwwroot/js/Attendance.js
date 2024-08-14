@@ -44,11 +44,32 @@ document.addEventListener('DOMContentLoaded', function () {
         otModal.hide();
     });
 
-    // Initialize flatpickr on the search input
-    flatpickr("#DatePicker", {
-        defaultDate: "today",
-        dateFormat: "Y-m-d",
-    });
+    //// Initialize flatpickr on the search input
+
+        const today = new Date();
+        const yesterday = new Date(today);
+        const tomorrow = new Date(today);
+
+        yesterday.setDate(today.getDate() - 1);
+        tomorrow.setDate(today.getDate() + 1);
+
+        const formattedToday = today.toISOString().split('T')[0];
+        const formattedYesterday = yesterday.toISOString().split('T')[0];
+        const formattedTomorrow = tomorrow.toISOString().split('T')[0];
+
+        flatpickr("#DatePicker", {
+            dateFormat: "Y-m-d",
+            defaultDate: "today",
+            minDate: formattedYesterday,
+            maxDate: formattedTomorrow,
+            onChange: function (selectedDates, dateStr, instance) {
+                if (dateStr !== formattedToday && dateStr !== formattedYesterday && dateStr !== formattedTomorrow) {
+                    alert('Please select only Today, Tomorrow, or Yesterday.');
+                    instance.setDate(formattedToday, true); // Reset to today if invalid date selected
+                }
+            }
+        });
+
 
     // Search functionality
     document.getElementById('SearchItem').addEventListener('input', function () {
@@ -57,6 +78,62 @@ document.addEventListener('DOMContentLoaded', function () {
             const text = row.textContent.toLowerCase();
             row.style.display = text.includes(searchValue) ? '' : 'none';
         });
+    });
+
+    // Event listener for "Fill All Present" button
+    document.getElementById('fillAllPresent').addEventListener('click', function () {
+        document.querySelectorAll('#EmployeeAttendance tbody tr').forEach(row => {
+            const presentCheckbox = row.querySelector('input[name^="attendance"]:first-child');
+            if (presentCheckbox) {
+                presentCheckbox.checked = true;
+            }
+            const absentCheckbox = row.querySelector('input[name^="attendance"]:nth-child(2)');
+            if (absentCheckbox) {
+                absentCheckbox.checked = false;
+            }
+        });
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
+    const rowsPerPage = 7;
+    let currentPage = 1;
+
+    const tableBody = document.querySelector("tbody");
+    const originalRows = Array.from(tableBody.querySelectorAll("tr"));
+    let filteredRows = [...originalRows];
+    let totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+
+    function displayRows() {
+        tableBody.innerHTML = "";
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const rowsToDisplay = filteredRows.slice(start, end);
+
+        rowsToDisplay.forEach(row => tableBody.appendChild(row));
+        document.getElementById("pageIndicator").innerText = `Page ${currentPage}`;
+    }
+
+    function updatePaginationControls() {
+        document.getElementById("prevPage").classList.toggle("disabled", currentPage === 1);
+        document.getElementById("nextPage").classList.toggle("disabled", currentPage === totalPages);
+    }
+
+    document.getElementById("prevPage").addEventListener("click", function (event) {
+        event.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+            displayRows();
+            updatePaginationControls();
+        }
+    });
+
+    document.getElementById("nextPage").addEventListener("click", function (event) {
+        event.preventDefault();
+        if (currentPage < totalPages) {
+            currentPage++;
+            displayRows();
+            updatePaginationControls();
+        }
     });
 });
 
@@ -137,6 +214,7 @@ function showAttendanceData(data) {
 
 // Function to fetch data and show it using the above function
 function GetAllEmployeeDetailsInTableFormat() {
+    $('#loadingSpinner').show(); // Show the spinner
     $.ajax({
         url: '/AddEmployee/GetEmployeeDetailsInTableForm',
         method: 'GET',
@@ -145,10 +223,14 @@ function GetAllEmployeeDetailsInTableFormat() {
         },
         error: function (error) {
             console.error('Error fetching employee data', error);
+        },
+        complete: function () {
+            $('#loadingSpinner').hide(); // Hide the spinner
         }
     });
 }
 function AttendanceDateSendToController(tableData) {
+    $('#loadingSpinner').show(); // Show the spinner
     $.ajax({
         url: '/AttendancesController/SendEmployeeAttendanceDetails',
         type: 'POST',
@@ -159,6 +241,9 @@ function AttendanceDateSendToController(tableData) {
         },
         error: function (error) {
             alert('Error submitting data: ' + error.responseText);
+        },
+        complete: function () {
+            $('#loadingSpinner').hide(); // Hide the spinner
         }
     });
 }

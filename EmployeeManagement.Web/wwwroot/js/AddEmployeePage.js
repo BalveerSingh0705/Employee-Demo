@@ -100,6 +100,7 @@ function oneStepBackFun() {
         if (!validatePFNumber()) valid = false;
         if (!validateWorkingHours()) valid = false;
         if (!validateCheckMeOut()) valid = false;
+     //   if (!inputFamilyContactNumber)
 
         return valid;
     }

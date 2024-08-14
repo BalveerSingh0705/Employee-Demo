@@ -71,6 +71,12 @@ namespace EmployeeManagement.DAO
                         command.Parameters.Add("@PFNumber", SqlDbType.NVarChar).Value = employee.pFNumber;
                         command.Parameters.Add("@WorkingHours", SqlDbType.NVarChar).Value = employee.workingHours;
 
+                        command.Parameters.Add("@ESI_Number", SqlDbType.NVarChar).Value = employee.esiNumber;
+                        command.Parameters.Add("@VAN_Number", SqlDbType.NVarChar).Value = employee.vanNumber;
+                        command.Parameters.Add("@FamilyContactNumber", SqlDbType.NVarChar).Value = employee.familyContactNumber;
+                        command.Parameters.Add("@Nature", SqlDbType.NVarChar).Value = employee.nature;
+
+
                         command.ExecuteNonQuery();
                         isSuccess = true;
                     }
