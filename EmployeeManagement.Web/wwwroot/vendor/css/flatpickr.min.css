@@ -18,7 +18,7 @@
     box-sizing: border-box;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
-    background: #fff;
+    background: #28243d;
     -webkit-box-shadow: 1px 0 0 #e6e6e6,-1px 0 0 #e6e6e6,0 1px 0 #e6e6e6,0 -1px 0 #e6e6e6,0 3px 13px rgba(0,0,0,0.08);
     box-shadow: 1px 0 0 #e6e6e6,-1px 0 0 #e6e6e6,0 1px 0 #e6e6e6,0 -1px 0 #e6e6e6,0 3px 13px rgba(0,0,0,0.08)
 }
@@ -618,7 +618,8 @@ span.flatpickr-weekday {
 
         .flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover {
             cursor: not-allowed;
-            color: rgba(57,57,57,0.1)
+            color: #fff;
+ 
         }
 
     .flatpickr-day.week.selected {
@@ -786,7 +787,7 @@ span.flatpickr-weekday {
     }
 
         .flatpickr-time input:hover, .flatpickr-time .flatpickr-am-pm:hover, .flatpickr-time input:focus, .flatpickr-time .flatpickr-am-pm:focus {
-            background: #eee
+            background: #080606
         }
 
 .flatpickr-input[readonly] {
@@ -819,4 +820,32 @@ span.flatpickr-weekday {
         -webkit-transform: translate3d(0,0,0);
         transform: translate3d(0,0,0)
     }
+}
+
+#fillAllPresent {
+    background-color: #28a745; /* Green color */
+    border-color: #28a745; /* Match border color */
+    margin-right: 10px; /* Custom margin on the right */
+}
+#saveOtDetails {
+    background-color: #28a745; /* Green color */
+    border-color: #28a745; /* Match border color */
+}
+#CloseModel {
+    background-color: red; /* Green color */
+    border-color: #28a745; /* Match border color */
+}
+/* Style for Present (P) radio button */
+.present-radio {
+    accent-color: green;
+}
+
+/* Style for Absent (A) radio button */
+.absent-radio {
+    accent-color: red;
+}
+
+/* Style for Overtime (OT) checkbox */
+.ot-checkbox {
+    accent-color: blue;
 }

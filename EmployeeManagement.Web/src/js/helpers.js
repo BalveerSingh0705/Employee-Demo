@@ -642,7 +642,7 @@ const Helpers = {
   },
 
   isLightStyle() {
-    return document.documentElement.classList.contains('light-style')
+    return document.documentElement.classList.contains('Dark-style')
   },
 
   // *******************************************************************************

@@ -206,6 +206,25 @@ function showAttendanceData(data) {
                             </td>
                         </tr>`;
             tableBody.insertAdjacentHTML('beforeend', row);
+            // Add event listeners for P and A radio buttons
+            const pRadio = document.getElementById(`P_${employee.empID}`);
+            const aRadio = document.getElementById(`A_${employee.empID}`);
+            const pLabel = pRadio.nextElementSibling;
+            const aLabel = aRadio.nextElementSibling;
+
+            pRadio.addEventListener('change', function () {
+                if (pRadio.checked) {
+                    pLabel.style.color = 'green';
+                    aLabel.style.color = ''; // Reset A label color
+                }
+            });
+
+            aRadio.addEventListener('change', function () {
+                if (aRadio.checked) {
+                    aLabel.style.color = 'red';
+                    pLabel.style.color = ''; // Reset P label color
+                }
+            });
         });
     } else {
         console.error("Expected data to be an array but got:", data);

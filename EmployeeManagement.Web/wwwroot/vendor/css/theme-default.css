@@ -1,13 +1,13 @@
 body {
-  background: #f4f5fa;
+    background: #28243d;
 }
 
 .bg-body {
-  background: #f4f5fa !important;
+    background: #28243d !important;
 }
 
 .text-primary {
-  color: #9055fd !important;
+    color: #e9e6ef !important;
 }
 
 .text-body[href]:hover {
@@ -15,29 +15,29 @@ body {
 }
 
 .bg-primary {
-  background-color: #9055fd !important;
+    background-color: #28243d !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus {
-  background-color: #8951f0 !important;
+    background-color: #28243d !important;
 }
 
 .dropdown-notifications-item:not(.mark-as-read) .dropdown-notifications-read span {
-  background-color: #9055fd;
+    background-color: #28243d;
 }
 
 .bg-label-primary {
-  background-color: #eee6ff !important;
-  color: #9055fd !important;
+    background-color: #eee6ff !important;
+    color: #28243d !important;
 }
 
 .page-item.active .page-link, .page-item.active .page-link:hover, .page-item.active .page-link:focus,
 .pagination li.active > a:not(.page-link),
 .pagination li.active > a:not(.page-link):hover,
 .pagination li.active > a:not(.page-link):focus {
-  border-color: #9055fd;
-  background-color: #9055fd;
-  color: #fff;
+    border-color: #28243d;
+    background-color: #28243d;
+    color: #fff;
 }
 .page-item.active .page-link.waves-effect .waves-ripple,
 .pagination li.active > a:not(.page-link).waves-effect .waves-ripple {
@@ -574,13 +574,13 @@ a:hover {
 }
 
 .bg-menu-theme {
-  background-color: #f4f5fa !important;
-  color: #544f5a;
+    background-color: #28243d !important;
+    color: white;
 }
 .bg-menu-theme .menu-link,
 .bg-menu-theme .menu-horizontal-prev,
 .bg-menu-theme .menu-horizontal-next {
-  color: #544f5a;
+  color: #fff;
 }
 .bg-menu-theme .menu-link:hover, .bg-menu-theme .menu-link:focus,
 .bg-menu-theme .menu-horizontal-prev:hover,
@@ -617,7 +617,7 @@ a:hover {
   color: #fff;
 }
 .bg-menu-theme .menu-inner-shadow {
-  background: linear-gradient(#f4f5fa 5%, rgba(244, 245, 250, 0.75) 45%, rgba(244, 245, 250, 0.2) 80%, transparent);
+  //background: linear-gradient(#f4f5fa 5%, rgba(244, 245, 250, 0.75) 45%, rgba(244, 245, 250, 0.2) 80%, transparent);
 }
 .bg-menu-theme .menu-text {
   color: #544f5a;

@@ -13,7 +13,7 @@
 // *******************************************************************************
 
 // scss-docs-start gray-color-variables
-$white: #fff !default;
+$white: #28243d !default;
 $black: #3a3541 !default;
 $gray-25: rgba($black, 0.015) !default; // (C)
 $gray-50: rgba($black, 0.04) !default; // (C)
@@ -61,20 +61,10 @@ $gray: $gray-100 !default; // (C)
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
-$theme-colors: (
-  'primary': $primary,
-  'secondary': $secondary,
-  'success': $success,
-  'info': $info,
-  'warning': $warning,
-  'danger': $danger,
-  'light': $light,
-  'dark': $dark,
-  'gray': $gray
-) !default;
+$theme-colors: ( 'primary': $primary, 'secondary': $secondary, 'success': $success, 'info': $info, 'warning': $warning, 'danger': $danger, 'light': $dark, 'dark': $dark, 'gray': $gray ) !default;
 // scss-docs-end theme-colors-map
 
-$color-scheme: 'light' !default; // (C)
+$color-scheme: 'Dark' !default; // (C)
 // The contrast ratio to reach against white, to determine if color changes from "light" to "dark". Acceptable values for WCAG 2.0 are 3, 4.5 and 7.
 // See https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
 $min-contrast-ratio: 1.6 !default;

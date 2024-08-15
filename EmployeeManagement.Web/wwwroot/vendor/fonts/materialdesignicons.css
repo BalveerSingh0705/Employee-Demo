@@ -10058,7 +10058,7 @@
 }
 
 .mdi-download-network::before {
-  content: "\F06F4";
+  content: 
 }
 
 .mdi-download-network-outline::before {
@@ -29740,7 +29740,10 @@
   vertical-align: middle;
 }
 
-.mdi:before,
-.mdi-set {
-  font-size: 18px;
-}
+    .mdi:before,
+    .mdi-set {
+        font-size: 18px;
+        color: #FFF !important;
+    }
+
+

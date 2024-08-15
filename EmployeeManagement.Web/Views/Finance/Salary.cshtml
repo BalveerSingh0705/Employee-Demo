@@ -1,0 +1,33 @@
+﻿<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <!-- EMPID, Month, Year Search - Aligned to the left -->
+        <form class="d-flex justify-content-start" role="search">
+            <input class="form-control me-2" type="search" placeholder="EMPID" aria-label="EMPID">
+
+            <!-- Month Search -->
+            <select class="form-control me-2">
+                <option value="" selected>Month</option>
+                <option value="01">January</option>
+                <option value="02">February</option>
+                <option value="03">March</option>
+                <option value="04">April</option>
+                <option value="05">May</option>
+                <option value="06">June</option>
+                <option value="07">July</option>
+                <option value="08">August</option>
+                <option value="09">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+
+            <!-- Year Search -->
+            <input class="form-control me-2" type="number" placeholder="Year" min="1900" max="2100" aria-label="Year">
+
+            <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<partial name="_tableViewInSalary" />

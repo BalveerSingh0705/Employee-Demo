@@ -1,0 +1,81 @@
+﻿<link href="~/css/loading.css" rel="stylesheet" />
+<div class="container mt-5">
+    <h2 class="text-light">Advance Salary Entry Form</h2>
+    <form id="salaryForm">
+
+        <div class="form-group row">
+            <label for="inputEmpID" class="col-sm-2 col-form-label">EmpID</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputEmpID" placeholder="EmpID">
+                <div class="invalid-feedback">Employee ID is required.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputName" placeholder="Name">
+                <div class="invalid-feedback">Name is required.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputAdvanceAmount" class="col-sm-2 col-form-label">Advance Amount</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="inputAdvanceAmount" placeholder="Advance Amount">
+                <div class="invalid-feedback">Please enter a valid amount greater than 0.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputAdvanceDate" class="col-sm-2 col-form-label">Advance Date</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="inputAdvanceDate">
+                <div class="invalid-feedback">Advance date is required.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPaymentTime" class="col-sm-2 col-form-label">Payment Time</label>
+            <div class="col-sm-10">
+                <input type="time" class="form-control" id="inputPaymentTime">
+                <div class="invalid-feedback">Payment time is required.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPaymentMode" class="col-sm-2 col-form-label">Payment Mode</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="inputPaymentMode">
+                    <option value="">Select Payment Mode</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <option value="Cheque">Cheque</option>
+                </select>
+                <div class="invalid-feedback">Payment mode is required.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPaymentBy" class="col-sm-2 col-form-label">Payment By</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputPaymentBy" placeholder="Payment By">
+                <div class="invalid-feedback">Payment by is required.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputOtherCredit" class="col-sm-2 col-form-label">Other Credit</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputOtherCredit" placeholder="Other Credit">
+                <div class="invalid-feedback">Please provide other credit information.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputOtherComment" class="col-sm-2 col-form-label">Other Comment</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="inputOtherComment" rows="3" placeholder="Other Comment"></textarea>
+                <div class="invalid-feedback">Please provide other comments if necessary.</div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/js/advancesalary.js"></script>

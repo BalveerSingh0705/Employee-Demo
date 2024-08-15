@@ -88,7 +88,8 @@
             </a>
             <ul class="menu-sub">
                 <li class='menu-item@(currentPage == "/Finance/Salary" ? " active" : "")'>
-                    <a asp-controller="Finance" asp-action="Salary" class="menu-link">
+                    <a asp-controller="Finance" asp-action="Salary" class="menu-link" onclick="GetSalaryInSalaryTable();">
+                        
                         <div>Salary</div>
                     </a>
                 </li>
