@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     $('#salaryForm').on('submit', function (e) {
         e.preventDefault(); // Prevent default form submission
 
