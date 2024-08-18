@@ -1,5 +1,7 @@
 ﻿
 
+using EmployeeManagement.DAO.Interface;
+
 namespace EmployeeManagement.DAO
 {
     public abstract class DAOFactories
@@ -8,6 +10,7 @@ namespace EmployeeManagement.DAO
 
        
         public abstract IConfiguration Configuration { get; }
+        public abstract IFinance Finance { get; }
 
 
         #endregion

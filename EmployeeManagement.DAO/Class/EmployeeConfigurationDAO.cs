@@ -1,11 +1,8 @@
 ﻿
 using EmployeeManagement.Core.Common;
 using EmployeeManagement.Core.Entities;
-using EmployeeManagement.DAO;
 using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Reflection.PortableExecutable;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
 
@@ -414,7 +411,42 @@ namespace EmployeeManagement.DAO
 
             return isSuccess;
         }
+        public IdEntity GetNextEmpID()
+        {
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
 
+                    using (var command = new SqlCommand("GenerateNextEmpID", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Execute the stored procedure and get the result
+                        var newEmpID = command.ExecuteScalar()?.ToString();
+
+                        if (!string.IsNullOrEmpty(newEmpID))
+                        {
+                            return new IdEntity { EmpID = newEmpID }; // Assuming IdEntity has a property EmpID
+                        }
+                        else
+                        {
+                            // Handle case where no result is returned
+                            return null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (optional)
+                Console.WriteLine($"Error occurred: {ex.Message}");
+
+                // Handle the exception as needed
+                return null;
+            }
+        }
 
 
     }

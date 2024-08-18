@@ -4,32 +4,34 @@ namespace EmployeeManagement.Core.Common
 {
     public class AdvanceSalaryEntity
     {
-        [Required]
+        [Required(ErrorMessage = "Employee ID is required.")]
         public string EmpID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
 
-        [Required]
-        [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid amount")]
+        [Required(ErrorMessage = "Advance amount is required.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Advance amount must be greater than 0.")]
         public decimal AdvanceAmount { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "Advance date is required.")]
+
         public DateTime AdvanceDate { get; set; }
 
-        [Required]
-        [DataType(DataType.Time)]
-        public TimeSpan PaymentTime { get; set; }
+        [Required(ErrorMessage = "Payment time is required.")]
 
-        [Required]
+        public String PaymentTime { get; set; }
+
+        [Required(ErrorMessage = "Payment mode is required.")]
         public string PaymentMode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Payment by is required.")]
         public string PaymentBy { get; set; }
 
-        public string OtherCredit { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "Other credit must be a positive value.")]
+        public decimal? OtherCredit { get; set; } 
 
         public string OtherComment { get; set; }
     }
 }
+

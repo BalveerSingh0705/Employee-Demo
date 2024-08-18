@@ -45,6 +45,11 @@ namespace EmployeeManagement.Business
         {
             return DAO.SendEmployeeAttendanceDetails(attendanceDataSendEntity);
         }
+
+        public IdEntity GetNextEmpID()
+        {
+            return DAO.GetNextEmpID();
+        }
     }
   
 }

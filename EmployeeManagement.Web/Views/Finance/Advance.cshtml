@@ -37,7 +37,7 @@
                 <input type="time" class="form-control" id="inputPaymentTime">
                 <div class="invalid-feedback">Payment time is required.</div>
             </div>
-        </div>
+        </div> 
         <div class="form-group row">
             <label for="inputPaymentMode" class="col-sm-2 col-form-label">Payment Mode</label>
             <div class="col-sm-10">
@@ -60,7 +60,7 @@
         <div class="form-group row">
             <label for="inputOtherCredit" class="col-sm-2 col-form-label">Other Credit</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputOtherCredit" placeholder="Other Credit">
+                <input type="number" class="form-control" id="inputOtherCredit" placeholder="Other Credit">
                 <div class="invalid-feedback">Please provide other credit information.</div>
             </div>
         </div>
@@ -78,4 +78,40 @@
         </div>
     </form>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- Default modal size (medium) -->
+        <div class="modal-content bg-dark text-light">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resultModalLabel">Result</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" id="CloseModel1">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Message will be injected here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal" id="CloseModel">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="~/js/advancesalary.js"></script>

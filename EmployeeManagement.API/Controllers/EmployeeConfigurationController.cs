@@ -187,6 +187,50 @@ namespace EmployeeManagement.API
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
             }
         }
+        [HttpGet]
+        [Route("GetNextEmpID")]
+        public IActionResult GetNextEmpID()
+        {
+
+
+            try
+            {
+                var response = SingletonBO<ConfigurationBO>.Instance.GetNextEmpID();
+
+                if (response == null )
+                {
+                    return BadRequest(new ApiResponseEntity<AttendanceTableEntity>
+                    {
+                        IsSuccess = false,
+                        StatusCode = 400,
+                        Message = "No employee details found in the attendance table."
+                    });
+                }
+
+                //return Ok(new ApiResponseEntity<List<AttendanceTableEntity>>
+                //{
+                //    IsSuccess = true,
+                //    StatusCode = 200,
+                //    Message = "Employee details retrieved successfully.",
+                //    Data = response
+                //});
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception here using your logging mechanism
+                // Example:
+                // LogError("GetEmployeeDetailsInAttendanceTable", ex);
+
+                return StatusCode(500, new ApiResponseEntity<string>
+                {
+                    IsSuccess = false,
+                    StatusCode = 500,
+                    Message = "An error occurred while fetching employee details.",
+                    Data = ex.Message // Consider using a more secure message in production
+                });
+            }
+        }
 
 
 

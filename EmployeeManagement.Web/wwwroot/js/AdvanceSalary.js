@@ -54,32 +54,51 @@
 
         // If form is valid, proceed with AJAX submission
         if (isValid) {
+            var otherCreditValue = $('#inputOtherCredit').val();
             var formData = {
-                empID: $('#inputEmpID').val(),
-                name: $('#inputName').val(),
-                advanceAmount: $('#inputAdvanceAmount').val(),
-                advanceDate: $('#inputAdvanceDate').val(),
-                paymentTime: $('#inputPaymentTime').val(),
-                paymentMode: $('#inputPaymentMode').val(),
-                paymentBy: $('#inputPaymentBy').val(),
-                otherCredit: $('#inputOtherCredit').val(),
-                otherComment: $('#inputOtherComment').val()
+                EmpID: $('#inputEmpID').val(),
+                Name: $('#inputName').val(),
+                AdvanceAmount: $('#inputAdvanceAmount').val(),
+                AdvanceDate: $('#inputAdvanceDate').val(),
+                PaymentTime: $('#inputPaymentTime').val(),
+                PaymentMode: $('#inputPaymentMode').val(),
+                PaymentBy: $('#inputPaymentBy').val(),
+                //OtherCredit: $('#inputOtherCredit').val(),
+                OtherCredit: otherCreditValue ? otherCreditValue : 0,
+                OtherComment: $('#inputOtherComment').val()
             };
 
             $.ajax({
-                url: '/your-controller-endpoint', // Replace with your server endpoint
+                url: '/FinanceController/AdvanceSalary', // Ensure this matches your controller route
                 type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(formData),
+                contentType: 'application/json', // Set content type to JSON
+                data: JSON.stringify(formData), // Serialize the data to JSON
                 success: function (response) {
-                    $('#modalBody').html('<p>Submission successful!</p>');
+                    if (response.success == true) {
+                        $('#modalBody').html('<p>Advance Payment successful!</p>');
+                        $('#salaryForm')[0].reset();
+
+
+                    } else {
+                        $('#modalBody').html('<p>Sorry, the employee you are trying to find does not exist.<br>Please check the employee ID and try again.</p>');
+
+
+                    }
                     $('#resultModal').modal('show');
                 },
                 error: function (xhr, status, error) {
-                    $('#modalBody').html('<p>An error occurred: ' + error + '</p>');
+                    $('#modalBody').html('<p>Oops! Something went wrong. Please try again later. <br> Error details: ' + error + '</p>');
+
                     $('#resultModal').modal('show');
                 }
             });
         }
     });
+});
+// View and edit single employee when clicking view button
+document.getElementById('CloseModel').addEventListener('click', function () {
+    $('#resultModal').modal('hide');
+});
+document.getElementById('CloseModel1').addEventListener('click', function () {
+    $('#resultModal').modal('hide');
 });

@@ -424,6 +424,104 @@ namespace EmployeeManagement.Web.Helper
             return isSuccess;
         }
 
+        public static async Task<bool>AdvanceSalary(AdvanceSalaryEntity advanceSalaryEntity)
+        {
+            bool isSuccess = false;
+            try   
+            {
+                // Ensure the URL for the API endpoint is correct.
+                string url = ServiceVirtualDirName + "api/FinanceConfiguration/AdvanceSalary";
+
+                // Use the BaseProxy class to perform the POST operation.
+                var response = await BaseProxy.Instance.PostAsyncMethod(url, advanceSalaryEntity);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Read the response content asynchronously.
+                    string result = await response.Content.ReadAsStringAsync();
+
+                    // Deserialize the result to a boolean.
+                    isSuccess = JsonConvert.DeserializeObject<bool>(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed.
+                //using (LogException _error = new LogException(typeof(ProxyService), TenantCache.GetSqlDbConnectionFromCacheByTenantId(employeeEntity.TenantId)))
+                //{
+                //    _error.Exception("Error in CreateEmployeeAsync", ex, TenantCache.GetSubDomainByTenantId((Guid)employeeEntity.TenantId), UserInfo.GetUserName(), employeeEntity);
+                //}
+
+                // Optionally rethrow the exception or handle it in a way that informs the caller
+                throw;
+            }
+            return isSuccess;
+        }
+
+        public static async Task<IdEntity> AddEmployeePage()
+        {
+            IdEntity idEntity = null;
+
+            try
+            {
+                // Ensure the URL for the API endpoint is correct.
+                string url = ServiceVirtualDirName + "api/EmployeeConfiguration/GetNextEmpID";
+
+                // Use the BaseProxy class to perform the GET operation.
+                var response = await BaseProxy.Instance.GetAsyncMethod(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    idEntity = JsonConvert.DeserializeObject<IdEntity>(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed.
+                // Example: LogError("AddEmployeePage", ex);
+
+                // Optionally rethrow the exception or handle it in a way that informs the caller.
+                throw new Exception("An error occurred while fetching the next employee ID.", ex);
+            }
+
+            return idEntity;
+        }
+
+
+        public static async Task<EmployeeSalaryEntity> FinalSalary(SalaryRequestEntity salaryRequestEntity)
+        {
+            EmployeeSalaryEntity employeeSalaryEntity = null;
+
+            try
+            {
+                // Ensure the URL for the API endpoint is correct.
+                string url = ServiceVirtualDirName + "api/FinanceConfiguration/FinalSalary";
+
+                // Use the BaseProxy class to perform the GET operation.
+                var response = await BaseProxy.Instance.PostAsyncMethod(url, salaryRequestEntity);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    var employeeSalaryEntities = JsonConvert.DeserializeObject<List<EmployeeSalaryEntity>>(result);
+
+        
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception as needed.
+                // Example: LogError("FinalSalary", ex);
+
+                // Optionally rethrow the exception or handle it in a way that informs the caller
+                throw new Exception("An error occurred while fetching employee salary details.", ex);
+            }
+
+            return employeeSalaryEntity;
+        }
+
+
 
     }
 }

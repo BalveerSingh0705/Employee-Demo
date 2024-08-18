@@ -17,8 +17,17 @@ namespace AspnetCoreMvcFull.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddEmployeePage()
+        public async Task<IActionResult> AddEmployeePage()
         {
+            var idEntity = await ProxyService.AddEmployeePage();
+
+                if (idEntity != null)
+                {
+                    // Proceed with idEntity.NextEmpID
+                    string nextEmpID = idEntity.EmpID; // Assuming NextEmpID is a property in IdEntity
+                ViewBag.NextEmpID = nextEmpID;
+            }
+          
             return View();
         }
 

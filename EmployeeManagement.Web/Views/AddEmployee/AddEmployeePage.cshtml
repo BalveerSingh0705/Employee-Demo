@@ -1,5 +1,6 @@
-﻿
-
+﻿@{
+    ViewBag.Title = "Add Employee";
+}
 
 
 <div class="border border-2 rounded p-3">
@@ -13,7 +14,7 @@
 
         <div class="col-md-6">
             <label for="inputEmpID" class="form-label">Employee ID</label>
-            <input type="text" class="form-control" id="inputEmpID" name="empID">
+            <input type="text" class="form-control" id="inputEmpID" name="empID" value="@ViewBag.NextEmpID">
             <span id="empID-error" style="color: red;"></span>
         </div>
 
@@ -161,7 +162,7 @@
 
 
         <div class="col-md-6">
-            <label for="inputEsiNumber" class="form-label">ESI Number</label>esiNumber
+            <label for="inputEsiNumber" class="form-label">ESI Number</label>
             <input type="text" class="form-control" id="inputEsiNumber" name="esiNumber">
             <span id="esiNumber-error" style="color: red;"></span>
         </div>
@@ -171,17 +172,6 @@
             <input type="text" class="form-control" id="inputVanNumber" name="vanNumber">
             <span id="vanNumber-error" style="color: red;"></span>
         </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
