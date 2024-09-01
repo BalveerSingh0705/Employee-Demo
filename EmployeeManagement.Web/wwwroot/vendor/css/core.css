@@ -18592,3 +18592,12 @@ html:not(.layout-footer-fixed) .content-wrapper {
 .modal-content {
     background-color: #302b4d !important;
 }
+
+/* CSS to style the table cells based on the salary amount */
+.positive-salary {
+    color: green !important;
+}
+
+.negative-salary {
+    color: red !important;
+}

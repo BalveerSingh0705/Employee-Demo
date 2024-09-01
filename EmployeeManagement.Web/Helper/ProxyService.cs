@@ -489,24 +489,22 @@ namespace EmployeeManagement.Web.Helper
         }
 
 
-        public static async Task<EmployeeSalaryEntity> FinalSalary(SalaryRequestEntity salaryRequestEntity)
+        public static async Task<List<EmployeeSalaryEntity>> FinalSalary(SalaryRequestEntity salaryRequestEntity)
         {
-            EmployeeSalaryEntity employeeSalaryEntity = null;
+            List<EmployeeSalaryEntity> employeeSalaryEntities = new List<EmployeeSalaryEntity>();
 
             try
             {
                 // Ensure the URL for the API endpoint is correct.
                 string url = ServiceVirtualDirName + "api/FinanceConfiguration/FinalSalary";
 
-                // Use the BaseProxy class to perform the GET operation.
+                // Use the BaseProxy class to perform the POST operation.
                 var response = await BaseProxy.Instance.PostAsyncMethod(url, salaryRequestEntity);
 
                 if (response.IsSuccessStatusCode)
                 {
                     string result = await response.Content.ReadAsStringAsync();
-                    var employeeSalaryEntities = JsonConvert.DeserializeObject<List<EmployeeSalaryEntity>>(result);
-
-        
+                    employeeSalaryEntities = JsonConvert.DeserializeObject<List<EmployeeSalaryEntity>>(result);
                 }
             }
             catch (Exception ex)
@@ -518,7 +516,7 @@ namespace EmployeeManagement.Web.Helper
                 throw new Exception("An error occurred while fetching employee salary details.", ex);
             }
 
-            return employeeSalaryEntity;
+            return employeeSalaryEntities;
         }
 
 

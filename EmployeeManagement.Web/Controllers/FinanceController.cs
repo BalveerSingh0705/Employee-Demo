@@ -50,7 +50,7 @@ namespace EmployeeManagment.Web.Controllers
         }
         [HttpPost]
         [Route("FinanceController/FinalSalary")]
-        public async Task<ActionResult<EmployeeSalaryEntity>> FinalSalaryAsync(SalaryRequestEntity salaryRequestEntity)
+        public async Task<ActionResult<EmployeeSalaryEntity>> FinalSalary([FromBody] SalaryRequestEntity salaryRequestEntity)
         {
             // Validate empID
             //if (string.IsNullOrEmpty(salaryRequestEntity.EmpID))
@@ -61,16 +61,16 @@ namespace EmployeeManagment.Web.Controllers
             //
 
             // Validate month
-            if (string.IsNullOrEmpty(salaryRequestEntity.Month) || !DateTime.TryParseExact(salaryRequestEntity.Month, "MMMM", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedMonth))
-            {
-                return BadRequest("Invalid month. Please provide a valid month name (e.g., 'January').");
-            }
+            //if (string.IsNullOrEmpty(salaryRequestEntity.Month) || !DateTime.TryParseExact(salaryRequestEntity.Month, "MMMM", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedMonth))
+            //{
+            //    return BadRequest("Invalid month. Please provide a valid month name (e.g., 'January').");
+            //}
 
             // Validate year
-            if (salaryRequestEntity.Year < 2000 || salaryRequestEntity.Year > DateTime.Now.Year)
-            {
-                return BadRequest("Invalid year. Please provide a year between 2000 and the current year.");
-            }
+            //if (salaryRequestEntity.Year < 2000 || salaryRequestEntity.Year > DateTime.Now.Year)
+            //{
+            //    return BadRequest("Invalid year. Please provide a year between 2000 and the current year.");
+            //}
             try
             {
                 var responce = await ProxyService.FinalSalary(salaryRequestEntity);

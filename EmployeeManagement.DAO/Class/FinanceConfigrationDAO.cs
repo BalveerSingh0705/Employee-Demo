@@ -15,6 +15,8 @@ namespace EmployeeManagement.DAO.Class
         public bool AdvanceSalary(AdvanceSalaryEntity advanceSalaryEntity)
         {
             bool isSuccess = false;
+            decimal totalAdvanceForMonth = 0m; // Initialize totalAdvanceForMonth
+
             try
             {
                 using (var connection = new SqlConnection(connectionString))
@@ -22,7 +24,7 @@ namespace EmployeeManagement.DAO.Class
                     connection.Open();
 
                     // Check if EmpID exists
-                    var checkCommand = new SqlCommand("SELECT COUNT(1) FROM EmployeeAdditionalDetails WHERE EmpID =@EmpID And IsDeleted= 0", connection);
+                    var checkCommand = new SqlCommand("SELECT COUNT(1) FROM EmployeeAdditionalDetails WHERE EmpID = @EmpID AND IsDeleted = 0", connection);
                     checkCommand.Parameters.AddWithValue("@EmpID", advanceSalaryEntity.EmpID);
                     int empExists = (int)checkCommand.ExecuteScalar();
 
@@ -32,35 +34,52 @@ namespace EmployeeManagement.DAO.Class
                     }
 
                     // If EmpID exists, proceed with advance salary entry
-                    var command = new SqlCommand("sp_InsertAdvanceSalary", connection)
+                    using (var command = new SqlCommand("sp_InsertAdvanceSalary", connection))
                     {
-                        CommandType = CommandType.StoredProcedure
-                    };
+                        command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@EmpID", advanceSalaryEntity.EmpID);
-                    command.Parameters.AddWithValue("@Name", advanceSalaryEntity.Name);
-                    command.Parameters.AddWithValue("@AdvanceAmount", advanceSalaryEntity.AdvanceAmount);
-                    command.Parameters.AddWithValue("@AdvanceDate", advanceSalaryEntity.AdvanceDate);
-                    command.Parameters.AddWithValue("@PaymentTime", advanceSalaryEntity.PaymentTime);
-                    command.Parameters.AddWithValue("@PaymentMode", advanceSalaryEntity.PaymentMode);
-                    command.Parameters.AddWithValue("@PaymentBy", advanceSalaryEntity.PaymentBy);
-                    command.Parameters.AddWithValue("@OtherCredit", (object)advanceSalaryEntity.OtherCredit ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@OtherComment", (object)advanceSalaryEntity.OtherComment ?? DBNull.Value);
+                        // Add parameters to the command
+                        command.Parameters.AddWithValue("@EmpID", advanceSalaryEntity.EmpID);
+                        command.Parameters.AddWithValue("@Name", advanceSalaryEntity.Name);
+                        command.Parameters.AddWithValue("@AdvanceAmount", advanceSalaryEntity.AdvanceAmount);
+                        command.Parameters.AddWithValue("@AdvanceDate", advanceSalaryEntity.AdvanceDate);
+                        command.Parameters.AddWithValue("@PaymentTime", advanceSalaryEntity.PaymentTime);
+                        command.Parameters.AddWithValue("@PaymentMode", advanceSalaryEntity.PaymentMode);
+                        command.Parameters.AddWithValue("@PaymentBy", advanceSalaryEntity.PaymentBy);
+                        command.Parameters.AddWithValue("@OtherCredit", (object)advanceSalaryEntity.OtherCredit ?? DBNull.Value);
+                        command.Parameters.AddWithValue("@OtherComment", (object)advanceSalaryEntity.OtherComment ?? DBNull.Value);
 
-                    var newId = command.ExecuteScalar(); // Returns the new ID
+                        // Execute the command and handle the result sets
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            // Read the first result set (NewId)
+                            if (reader.Read())
+                            {
+                                int newId = reader["NewId"] != DBNull.Value ? Convert.ToInt32(reader["NewId"]) : 0;
+                                // Optional: use the newId if needed
+                            }
+
+                            // Move to the next result set (TotalAdvanceForMonth)
+                            if (reader.NextResult() && reader.Read())
+                            {
+                                totalAdvanceForMonth = reader["TotalAdvanceForMonth"] != DBNull.Value ? Convert.ToDecimal(reader["TotalAdvanceForMonth"]) : 0;
+                            }
+                        }
+
+                        isSuccess = true; // If both operations succeed, set success to true
+                    }
                 }
-
-                isSuccess = true;
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as needed
-                // Optionally, you can return the exception message to the calling method for debugging
+                // Log the exception
+                // Optionally, handle the exception or rethrow it
                 isSuccess = false;
             }
 
             return isSuccess;
         }
+
 
         public List<EmployeeSalaryEntity> FinalSalary(SalaryRequestEntity salaryRequestEntity)
         {
@@ -76,7 +95,7 @@ namespace EmployeeManagement.DAO.Class
                         command.CommandType = CommandType.StoredProcedure;
 
                         // Add parameters to the command
-                        command.Parameters.Add("@EmpID", SqlDbType.NVarChar).Value = (object)salaryRequestEntity.EmpID ?? DBNull.Value;
+                        command.Parameters.Add("@EmpID", SqlDbType.NVarChar).Value = string.IsNullOrEmpty(salaryRequestEntity.EmpID) ? null: salaryRequestEntity.EmpID;
                         command.Parameters.Add("@Year", SqlDbType.Int).Value = salaryRequestEntity.Year;
                         command.Parameters.Add("@Month", SqlDbType.Int).Value = salaryRequestEntity.Month;
 
@@ -111,6 +130,7 @@ namespace EmployeeManagement.DAO.Class
             catch (Exception ex)
             {
                 // Log the exception (implement your logging mechanism here)
+                // Optionally rethrow the exception to be handled further up the call stack
                 throw new Exception("An error occurred while fetching employee salary details.", ex);
             }
 
