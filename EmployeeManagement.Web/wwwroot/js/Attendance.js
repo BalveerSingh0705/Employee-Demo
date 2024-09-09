@@ -250,19 +250,52 @@ function GetAllEmployeeDetailsInTableFormat() {
 }
 function AttendanceDateSendToController(tableData) {
     $('#loadingSpinner').show(); // Show the spinner
+
     $.ajax({
         url: '/AttendancesController/SendEmployeeAttendanceDetails',
         type: 'POST',
         data: JSON.stringify(tableData),
         contentType: 'application/json',
         success: function (response) {
-            alert('Data submitted successfully!');
+           
+            // Default message settings
+            var message = '';
+            var alertClass = '';
+
+            if (response.success === true) {
+                message = 'Data submitted successfully!';
+                alertClass = 'alert-success'; // Bootstrap class for success
+            } else {
+                message = 'Data submission failed!';
+                alertClass = 'alert-danger'; // Bootstrap class for error
+            }
+
+       
+
+            // Update and show the success/error message
+            $('#successMessage').text(message).removeClass().addClass('alert ' + alertClass).show();
+
+            // Hide the message after 3 seconds
+            setTimeout(function () {
+                $('#successMessage').fadeOut('slow');
+            }, 3000);
         },
-        error: function (error) {
-            alert('Error submitting data: ' + error.responseText);
+        error: function (err) {
+           
+
+            // Handle AJAX errors
+            var errorMessage = 'An error occurred while submitting data. Please try again later.';
+            $('#successMessage').text(errorMessage).removeClass().addClass('alert alert-danger').show();
+
+            // Hide the message after 3 seconds
+            setTimeout(function () {
+                $('#successMessage').fadeOut('slow');
+            }, 3000);
         },
         complete: function () {
-            $('#loadingSpinner').hide(); // Hide the spinner
+            // Hide the spinner
+            $('#loadingSpinner').hide();
         }
     });
 }
+

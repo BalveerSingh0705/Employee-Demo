@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EmployeeManagement.Business
+﻿namespace EmployeeManagement.Business
 {
 
 
 
-        /// <summary>
-        /// The use of this singleton is to maintain single instance of BO
-        /// </summary>
-        /// <typeparam name="T">Type T is any BO class which used to get/create instance.</typeparam>
-        public sealed class SingletonBO<T> where T : class, new()
+    /// <summary>
+    /// The use of this singleton is to maintain single instance of BO
+    /// </summary>
+    /// <typeparam name="T">Type T is any BO class which used to get/create instance.</typeparam>
+    public sealed class SingletonBO<T> where T : class, new()
         {
             private static volatile T _instance;
             private static readonly object _syncRoot = new object();

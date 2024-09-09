@@ -1,1 +1,10 @@
-/* Custom styles goes here */
+.btn-custom-search {
+    background-color: red; /* Custom blue color */
+    color: white;
+    border-color: #007bff;
+}
+
+    .btn-custom-search:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        color: white;
+    }

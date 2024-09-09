@@ -20,5 +20,6 @@ namespace EmployeeManagement.DAO
         List<AttendanceTableEntity> GetEmployeeDetailsInAttendanceTable();
         bool SendEmployeeAttendanceDetails(List<AttendanceDataSendEntity> attendanceDataSendEntity);
         IdEntity GetNextEmpID();
+     
     }
 }

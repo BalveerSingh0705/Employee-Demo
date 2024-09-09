@@ -11,6 +11,7 @@ namespace EmployeeManagement.DAO
        
         public abstract IConfiguration Configuration { get; }
         public abstract IFinance Finance { get; }
+        public abstract IAuth Auth { get; }
 
 
         #endregion

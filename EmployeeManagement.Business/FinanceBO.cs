@@ -1,7 +1,6 @@
 ﻿using EmployeeManagement.Business.Base;
 using EmployeeManagement.Core.Common;
 using EmployeeManagement.DAO.Interface;
-using System.Net;
 
 namespace EmployeeManagement.Business
 {
@@ -11,6 +10,8 @@ namespace EmployeeManagement.Business
         {
             return DAO.AdvanceSalary(advanceSalaryEntity);
         }
+
+
 
         public List<EmployeeSalaryEntity> FinalSalary(SalaryRequestEntity salaryRequestEntity)
         {
@@ -36,6 +37,7 @@ namespace EmployeeManagement.Business
 
                         // Calculate overtime salary
                         decimal otSalary = (employeeSalaryEntity.TotalHours*60 ?? 0) * salaryPerMinute;
+                        employeeSalaryEntity.TotalSalaryForMonth = employeeSalaryEntity.TotalSalaryForMonth - (employeeSalaryEntity.PfAmount + employeeSalaryEntity.EsiAmount);
 
                         // CalculemployeeSalaryEntityate total salary for the month
                         employeeSalaryEntity.TotalSalaryForMonth = (basicSalary + otSalary + employeeSalaryEntity.OtherCredit.GetValueOrDefault()) - employeeSalaryEntity.AdvanceAmount.GetValueOrDefault();

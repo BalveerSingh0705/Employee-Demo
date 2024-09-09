@@ -1,6 +1,4 @@
 ﻿
-
-
 using EmployeeManagement.DAO.Interface;
 
 namespace EmployeeManagement.DAO
@@ -12,7 +10,8 @@ namespace EmployeeManagement.DAO
         {
 
               {typeof(IConfiguration), factory.Configuration},
-              {typeof(IFinance), factory.Finance}
+              {typeof(IFinance), factory.Finance},
+            {typeof(IAuth), factory.Auth}
 
 
 

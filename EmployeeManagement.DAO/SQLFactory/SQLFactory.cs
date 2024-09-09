@@ -10,6 +10,7 @@ namespace EmployeeManagement.DAO
 
         public override IConfiguration Configuration => new EmployeeConfigurationDAO();
         public override IFinance Finance => new FinanceConfigrationDAO();
+        public override IAuth Auth => new AuthConfigurationDAO();
 
     }
 }

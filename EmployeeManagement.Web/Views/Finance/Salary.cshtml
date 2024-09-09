@@ -1,11 +1,14 @@
-﻿<nav class="navbar navbar-dark bg-dark">
+﻿<link href="~/css/site.css" rel="stylesheet" />
+
+<nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <form class="d-flex justify-content-start" role="search" id="searchForm">
+            <!-- Employee ID Search -->
             <input id="empID" class="form-control me-2" type="search" placeholder="EMPID" aria-label="EMPID">
 
             <!-- Month Search -->
-            <select id="monthSelect" class="form-control me-2">
-                <option value="" disabled>Select Month</option>
+            <select id="monthSelect" class="form-select me-2">
+                <option value="" disabled selected>Select Month</option>
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -20,14 +23,18 @@
                 <option value="12">December</option>
             </select>
 
-
             <!-- Year Search -->
             <input id="yearInput" class="form-control me-2" type="number" placeholder="Year" min="1900" max="2100" aria-label="Year">
 
-            <button class="btn btn-outline-light" type="button" onclick="searchSalaries()">Search</button>
+            <!-- Search Button -->
+            <button class="btn btn-outline-success" type="button" onclick="searchSalaries()">
+                <i class="bi bi-search"></i> S
+            </button>
+           
         </form>
     </div>
 </nav>
+
 
 
 <partial name="_tableViewInSalary" />

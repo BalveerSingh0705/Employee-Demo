@@ -2,11 +2,6 @@
 using EmployeeManagement.Core.Common;
 using EmployeeManagement.Core.Entities;
 using EmployeeManagement.DAO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.Business
 {
@@ -50,6 +45,8 @@ namespace EmployeeManagement.Business
         {
             return DAO.GetNextEmpID();
         }
+
+
     }
   
 }
