@@ -208,12 +208,6 @@ namespace EmployeeManagement.Web.Helper
             try
             {
                 var json = JsonConvert.SerializeObject(objectData);
-                //var content = new StringContent(json, Encoding.UTF8, "application/json");
-                //var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-                //var httpClient = new HttpClient();
-
-
 
                 var client = new HttpClient();
                 var content = new StringContent(json, Encoding.UTF8, "application/json");

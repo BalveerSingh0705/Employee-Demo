@@ -10,29 +10,39 @@ namespace EmployeeManagement.API.Controllers
     [ApiController]
     public class AuthConfigurationController : ControllerBase
     {
-
         [HttpPost]
         [Route("AuthRegister")]
         public async Task<IActionResult> AuthRegister([FromBody] AuthRegisterViewModel authRegisterViewModel)
         {
             try
             {
-                var response =await SingletonBO<AuthBO>.Instance.AuthRegister(authRegisterViewModel);
+                var response = await SingletonBO<AuthBO>.Instance.AuthRegister(authRegisterViewModel);
                 if (response.Success)
                 {
-                    return Ok(response);
+                    return Ok(response); // Return a 200 OK with the success response
                 }
                 else
                 {
-                    return BadRequest(response);
+                    return BadRequest(new AuthResponse
+                    {
+                        Success = false,
+                        Message = response.Message ?? "Registration failed due to unknown reasons.",
+                        UserId = response.UserId
+                    });
                 }
             }
             catch (Exception ex)
             {
                 // Handle the exception and return a meaningful error response
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return StatusCode(500, new AuthResponse
+                {
+                    Success = true,
+                    Message = $"Internal server error: {ex.Message}",
+                    UserId = null
+                });
             }
         }
+
 
     }
 }

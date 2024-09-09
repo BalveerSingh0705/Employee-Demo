@@ -38,7 +38,7 @@ public class AuthController : Controller
         catch (Exception ex)
         {
             // Log the exception details if necessary
-            return StatusCode(500, new { success = false, error = "An error occurred while processing the request." });
+            return StatusCode(500, new { success = false, massage = "An error occurred while processing the request." });
         }
     }
 

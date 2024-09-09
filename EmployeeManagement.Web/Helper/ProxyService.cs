@@ -517,39 +517,34 @@ namespace EmployeeManagement.Web.Helper
             return employeeSalaryEntities;
         }
 
-        public static async Task<AuthResponse>AuthRegister(AuthRegisterViewModel authRegisterViewModel)
+        public static async Task<AuthResponse> AuthRegister(AuthRegisterViewModel authRegisterViewModel)
         {
             AuthResponse authResponse = new AuthResponse();
             try
             {
-                // Ensure the URL for the API endpoint is correct.
                 string url = ServiceVirtualDirName + "api/AuthConfiguration/AuthRegister";
-
-                // Use the BaseProxy class to perform the POST operation.
                 var response = await BaseProxy.Instance.PostAsyncMethod(url, authRegisterViewModel);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // Read the response content asynchronously.
                     string result = await response.Content.ReadAsStringAsync();
-
-                    // Deserialize the result to a boolean.
-                   authResponse = JsonConvert.DeserializeObject<AuthResponse>(result);
+                    authResponse = JsonConvert.DeserializeObject<AuthResponse>(result);
+                }
+                else
+                {
+                    // Handle unsuccessful status codes here
+                    string errorResult = await response.Content.ReadAsStringAsync();
+                    authResponse = JsonConvert.DeserializeObject<AuthResponse>(errorResult);
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception as needed.
-                //using (LogException _error = new LogException(typeof(ProxyService), TenantCache.GetSqlDbConnectionFromCacheByTenantId(employeeEntity.TenantId)))
-                //{
-                //    _error.Exception("Error in CreateEmployeeAsync", ex, TenantCache.GetSubDomainByTenantId((Guid)employeeEntity.TenantId), UserInfo.GetUserName(), employeeEntity);
-                //}
-
-                // Optionally rethrow the exception or handle it in a way that informs the caller
-                throw;
+                authResponse.Success = false;
+                authResponse.Message = $"Exception: {ex.Message}";
             }
             return authResponse;
         }
+
     }
 }
 

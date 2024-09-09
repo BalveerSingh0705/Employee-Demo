@@ -83,7 +83,7 @@ namespace EmployeeManagement.DAO.Class
             {
                 // Handle SQL exceptions and capture detailed error message
                 response.Success = false;
-                response.Message = $"SQL Error: {ex.Message}";
+                response.Message = "The request timed out while accessing the database. Please try again later.";//$"SQL Error: {ex.Message}";
             }
             catch (Exception ex)
             {
