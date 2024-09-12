@@ -1,6 +1,4 @@
-﻿$(document).ready(initializeEventHandlers);
-
-function initializeEventHandlers() {
+﻿function initializeEventHandlers() {
     // Toggle password visibility
     $('#togglePassword').on('click', function () {
         togglePasswordVisibility('#password', this);
@@ -10,10 +8,16 @@ function initializeEventHandlers() {
         togglePasswordVisibility('#confirmPassword', this);
     });
 
-    // Form submission with AJAX
+    // Form submission with AJAX for registration
     $('#formAuthentication').on('submit', function (e) {
         e.preventDefault();
-        handleFormSubmission();
+        handleRegistrationFormSubmission();
+    });
+
+    // Form submission with AJAX for login
+    $("#loginForm").on('submit', function (event) {
+        event.preventDefault();
+        handleLoginFormSubmission(); // Ensure the login form submission is handled here
     });
 }
 
@@ -25,8 +29,8 @@ function togglePasswordVisibility(passwordFieldSelector, toggleButton) {
     $(toggleButton).find('i').toggleClass('mdi-eye-outline mdi-eye-off-outline');
 }
 
-// Function to handle form submission with AJAX
-function handleFormSubmission() {
+// Function to handle registration form submission with AJAX
+function handleRegistrationFormSubmission() {
     // Validation
     const password = $('#password').val();
     const confirmPassword = $('#confirmPassword').val();
@@ -45,7 +49,7 @@ function handleFormSubmission() {
     };
 
     $.ajax({
-        url: '/AuthController/AuthRegister', // Adjust the URL to match your API controller and action
+        url: '/Auth/Register', // Adjust the URL to match your API controller and action
         type: 'POST',
         data: JSON.stringify(formData),
         contentType: 'application/json',
@@ -60,13 +64,44 @@ function handleFormSubmission() {
             }
         },
         error: function (xhr, status, error) {
-            var errorMessage = "An error occurred";
+            let errorMessage = "An error occurred";
             if (status === "timeout") {
                 errorMessage = "The request timed out. Please try again.";
             } else if (xhr.responseJSON) {
                 errorMessage = xhr.responseJSON.message;
             }
             showMessage(errorMessage, 'danger');
+        }
+    });
+}
+
+// Function to handle login form submission with AJAX
+function handleLoginFormSubmission() {
+    const formData = {
+        emailUsername: $("#email").val(),
+        password: $("#password").val(),
+        rememberMe: $("#remember-me").is(":checked")
+    };
+
+    loginFormSendDataToController(formData); // Corrected function name
+}
+
+function loginFormSendDataToController(formData) {
+    // Perform the AJAX request
+    $.ajax({
+        url: "/Auth/Login",
+        type: "POST",
+        data: JSON.stringify(formData),
+        contentType: "application/json",
+        success: function (response) {
+            if (response.success) {
+                window.location.href = response.redirectUrl || '/Home/Index'; // Redirect on success
+            } else {
+                showMessage(response.message, 'danger'); // Show error message
+            }
+        },
+        error: function (xhr, status, error) {
+            showMessage("An error occurred while processing your request: " + error, 'danger');
         }
     });
 }
@@ -83,3 +118,8 @@ function hideMessageAfterDelay() {
         $('#message').html('');
     }, 5000);
 }
+
+// Initialize event handlers when the document is ready
+$(document).ready(function () {
+    initializeEventHandlers();
+});

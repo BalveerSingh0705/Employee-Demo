@@ -49,13 +49,7 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        ////Register SQLFactory with IAUth
-        //builder.Services.AddSingleton<DAOFactories>(provider =>
-        //{
-        //    var configuration = provider.GetRequiredService<IAuth>();
-        //    return DAOFactories.GetFactory(configuration);
-        //});
-
+        
         // Register scoped services
         builder.Services.AddScoped<AuthBO>();
         builder.Services.AddScoped<IAuth>(provider => provider.GetRequiredService<DAOFactories>().Auth);

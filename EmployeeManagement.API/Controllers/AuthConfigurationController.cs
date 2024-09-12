@@ -42,6 +42,36 @@ namespace EmployeeManagement.API.Controllers
                 });
             }
         }
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
+        {
+            try
+            {
+                var loginResponse = await SingletonBO<AuthBO>.Instance.Login(loginModel);
+                if (loginResponse.Success)
+                {
+                    return Ok(new
+                    {
+                        Token = loginResponse.Token,
+                        Expiration = loginResponse.Expiration
+                    });
+                }
+                return Unauthorized(new AuthResponse
+                {
+                    Success = false,
+                    Message = "Invalid login credentials."
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new AuthResponse
+                {
+                    Success = false,
+                    Message = $"Internal server error: {ex.Message}"
+                });
+            }
+        }
 
 
     }

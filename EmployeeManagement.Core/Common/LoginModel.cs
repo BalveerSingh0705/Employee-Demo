@@ -14,27 +14,20 @@ namespace EmployeeManagement.Core.Common
     }
 
 
-        public class AuthLoginResponse
-        {
-            public bool IsSuccess { get; set; }
-            public string Token { get; set; }
-            public string ErrorMessage { get; set; }
-        }
+    //public class LoginModel
+    //{
+    //    public string Email { get; set; }
+    //    public string Password { get; set; }
+    //}
 
-    public class AuthResponse
+    public class AuthResponseLoginModel
     {
         public bool Success { get; set; }
         public string Message { get; set; }
         public string Token { get; set; }
-        public int? UserId { get; set; }
+        public DateTime? Expiration { get; set; }
     }
 
-    public class User
-    {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; } // Store hashed passwords
-    }
 
 
 

@@ -6,4 +6,8 @@
         public string Message { get; set; }
         public Guid? UserId { get; set; }  // Optionally, include the UserId
     }
+
+
+
+
 }

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Net.Http;
-using System.Net.Http.Formatting;
+﻿using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using EmployeeManagement.Core.Common;
 using EmployeeManagement.Exceptions.Manager;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using EmployeeManagement.Core.Entities;
 namespace EmployeeManagement.Web.Helper
@@ -545,6 +537,33 @@ namespace EmployeeManagement.Web.Helper
             return authResponse;
         }
 
+        public static async Task<AuthResponseLoginModel> AuthLogin(LoginModel loginModel)
+        {
+            AuthResponseLoginModel authResponseLoginModel = new AuthResponseLoginModel();
+            try
+            {
+                string url = ServiceVirtualDirName + "api/AuthConfiguration/AuthLogin";
+                var response = await BaseProxy.Instance.PostAsyncMethod(url, loginModel);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    authResponseLoginModel = JsonConvert.DeserializeObject<AuthResponseLoginModel>(result);
+                }
+                else
+                {
+                    // Handle unsuccessful status codes here
+                    string errorResult = await response.Content.ReadAsStringAsync();
+                    authResponseLoginModel = JsonConvert.DeserializeObject<AuthResponseLoginModel>(errorResult);
+                }
+            }
+            catch (Exception ex)
+            {
+                authResponseLoginModel.Success = false;
+                authResponseLoginModel.Message = $"Exception: {ex.Message}";
+            }
+            return authResponseLoginModel;
+        }
     }
 }
 

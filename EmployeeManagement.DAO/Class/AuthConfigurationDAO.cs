@@ -1,8 +1,12 @@
 ﻿using EmployeeManagement.Core.Common;
 using EmployeeManagement.DAO.Interface;
 using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Data;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace EmployeeManagement.DAO.Class
 {
@@ -10,6 +14,7 @@ namespace EmployeeManagement.DAO.Class
     {
         private readonly string _connectionString;
         string connectionString = ConstantsModels.loginQuery;
+        private char[] _jwtSecret;
 
         public AuthResponse AuthRegister(AuthRegisterViewModel viewModel)
         {
@@ -95,7 +100,77 @@ namespace EmployeeManagement.DAO.Class
             return response;
         }
 
-        private string HashPassword(string password)
+
+
+    public AuthResponseLoginModel Login(LoginModel loginViewModel)
+    {
+        AuthResponseLoginModel response = new AuthResponseLoginModel();
+
+        try
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                // Authenticate user
+                using (SqlCommand cmd = new SqlCommand("usp_AuthenticateUser", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Email", loginViewModel.emailUsername);
+                    cmd.Parameters.AddWithValue("@Password", HashPassword(loginViewModel.password));
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        var userId = reader["UserId"];
+                        var username = reader["Username"];
+                        var email = reader["Email"];
+
+                        // Generate JWT token
+                        var tokenHandler = new JwtSecurityTokenHandler();
+                        var key = Encoding.UTF8.GetBytes("4f1feeca525de4cdb064656007da3edac7895a87ff0ea865693300fb8b6e8f9c"); // Replace _jwtSecret with actual secret from config
+                        var tokenDescriptor = new SecurityTokenDescriptor
+                        {
+                            Subject = new ClaimsIdentity(new[]
+                            {
+                            new Claim(ClaimTypes.Name, username.ToString()),
+                            new Claim(ClaimTypes.Email, email.ToString()),
+                            new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+                        }),
+                            Expires = DateTime.UtcNow.AddMinutes(double.Parse("1")), // From config
+                            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                        };
+
+                        var token = tokenHandler.CreateToken(tokenDescriptor);
+                        response.Token = tokenHandler.WriteToken(token);
+                        response.Expiration = tokenDescriptor.Expires.Value;
+                        response.Success = true;
+                        response.Message = "Login successful.";
+                    }
+                    else
+                    {
+                        response.Success = false;
+                        response.Message = "Invalid email or password.";
+                    }
+                }
+            }
+        }
+        catch (SqlException ex)
+        {
+            response.Success = false;
+            response.Message = "Database error: " + ex.Message;
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = "An error occurred during login: " + ex.Message;
+        }
+
+        return response;
+    }
+
+
+    private string HashPassword(string password)
         {
             using (var sha256 = System.Security.Cryptography.SHA256.Create())
             {

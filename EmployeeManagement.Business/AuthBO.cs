@@ -15,5 +15,11 @@ namespace EmployeeManagement.Business
         {
             return DAO.AuthRegister(authRegisterViewModel);
         }
+
+        public async Task<AuthResponseLoginModel> Login(LoginModel loginViewModel)
+        {
+            return DAO.Login(loginViewModel);
+        }
+
     }
 }
