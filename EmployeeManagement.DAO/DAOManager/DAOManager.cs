@@ -21,7 +21,7 @@ namespace EmployeeManagement.DAO
         /// Function which return the DAO Proxy object based on the input parameter "T".
         /// </summary>
         /// <typeparam name="T">Input type parameter (i.e. interface)</typeparam>
-        /// <returns>Return the DAO Proxy object based on the input parameter "T"</returns>
+        /// <returns>Return the DAO Proxy object based on the input parameter "T"</return
         public static T GetDAO<T>() => (T)DaoList[typeof(T)];
     }
 }
